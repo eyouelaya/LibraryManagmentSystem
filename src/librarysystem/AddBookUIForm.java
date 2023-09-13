@@ -9,21 +9,33 @@ import business.SystemController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-/**
- * @author Ali ziwa
- */
 public class AddBookUIForm extends JFrame {
+    private JLabel label1;
+    private JButton addBook;
+    private JPanel panel1;
+    private JPanel panel5;
+    private JLabel successText;
+    private JPanel panel3;
+    private JLabel label3;
+    private JTextField bookTitle;
+    private JPanel panel2;
+    private JLabel label2;
+    private JTextField isbnTextField;
+    private JPanel panel4;
+    private JPanel bottom;
+    private JButton addAuthorBtn;
     public AddBookUIForm() {
         initComponents();
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Ali ziwa
+
         label1 = new JLabel();
-        addBookAuthor = new JButton();
+        addBook = new JButton();
         panel1 = new JPanel();
         panel5 = new JPanel();
         successText = new JLabel();
@@ -46,8 +58,9 @@ public class AddBookUIForm extends JFrame {
         contentPane.add(label1, BorderLayout.NORTH);
 
         //---- addBookAuthor ----
-        addBookAuthor.setText("Add book");
-        contentPane.add(addBookAuthor, BorderLayout.SOUTH);
+        addBook.setText("Add book");
+
+        contentPane.add(addBook, BorderLayout.SOUTH); 
 
         //======== panel1 ========
         {
@@ -116,33 +129,24 @@ public class AddBookUIForm extends JFrame {
             new AddAuthorUIForm().setVisible(true);
         });
 
-        addBookAuthor.addActionListener(e -> {
-            String title = bookTitle.getText();
-            String isbnText = isbnTextField.getText();
-            List<Author> authorsList = SystemController.getInstance().getAuthorsList();
+        addBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String title = bookTitle.getText();
+                String isbnText = isbnTextField.getText();
+                List<Author> authorsList = SystemController.getInstance().getAuthorsList();
 
-            if ((!title.isEmpty() && !isbnText.isEmpty() && !authorsList.isEmpty())) {
-                SystemController.getInstance().addBook(title, isbnText, authorsList);
-                successText.setForeground(Color.green);
-                successText.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(AddBookUIForm.this, "Please provide all information.");
-                successText.setVisible(false);
+                if ((!title.isEmpty() && !isbnText.isEmpty() && !authorsList.isEmpty())) {
+                    SystemController.getInstance().addBook(title, isbnText, authorsList);
+                    successText.setForeground(Color.green);
+                    successText.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(AddBookUIForm.this, "Please provide all information.");
+                    successText.setVisible(false);
+                }
             }
         });
     }
 
-    private JLabel label1;
-    private JButton addBookAuthor;
-    private JPanel panel1;
-    private JPanel panel5;
-    private JLabel successText;
-    private JPanel panel3;
-    private JLabel label3;
-    private JTextField bookTitle;
-    private JPanel panel2;
-    private JLabel label2;
-    private JTextField isbnTextField;
-    private JPanel panel4;
-    private JButton addAuthorBtn;
+
 }

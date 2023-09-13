@@ -116,7 +116,7 @@ public class SystemController {
 	}
 
 	public void addBook(String title, String isbn, List<Author> authors) {
-		Book book = new Book(title, isbn, 10, authors);
+		Book book = new Book(isbn, title, 10, authors);
 		dataAccess.saveNewBook(book);
 	}
 
