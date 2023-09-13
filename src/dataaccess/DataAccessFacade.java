@@ -72,6 +72,17 @@ public class DataAccessFacade implements DataAccess {
 
 	@Override
 	public BookCopy nextAvailableBookCopy(String isbn) {
+		HashMap<String, Book> bookHashMap = readBooksMap();
+		Book book = bookHashMap.get(isbn);
+
+		if (book != null) {
+			for (BookCopy bookCopy : book.getCopies()) {
+				if (bookCopy.isAvailable()) {
+					return bookCopy;
+				}
+			}
+		}
+
 		return null;
 	}
 
