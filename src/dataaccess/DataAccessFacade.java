@@ -49,12 +49,14 @@ public class DataAccessFacade implements DataAccess {
 
 	@Override
 	public boolean searchMember(String memberId) {
-		return false;
+		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
+		return libraryMemberHashMap.containsKey(memberId);
 	}
 
 	@Override
 	public Book searchBook(String isbn) {
-		return null;
+		HashMap<String, Book> bookHashMap = readBooksMap();
+		return bookHashMap.containsKey(isbn) ? bookHashMap.get(isbn) : null;
 	}
 
 	@Override
