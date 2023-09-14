@@ -38,10 +38,10 @@ public class AddAuthorUIForm extends JFrame {
     private JTextField streetText;
     private JPanel panel19;
     private JLabel label9;
-    private JTextField credText;
     private JPanel panel20;
     private JLabel label10;
     private JTextField shortBioText;
+
     public AddAuthorUIForm() {
         initComponents();
     }
@@ -76,7 +76,6 @@ public class AddAuthorUIForm extends JFrame {
         streetText = new JTextField();
         panel19 = new JPanel();
         label9 = new JLabel();
-        credText = new JTextField();
         panel20 = new JPanel();
         label10 = new JLabel();
         shortBioText = new JTextField();
@@ -210,13 +209,6 @@ public class AddAuthorUIForm extends JFrame {
             {
                 panel19.setLayout(new FlowLayout());
 
-                //---- label9 ----
-                label9.setText("Short Credentials: ");
-                panel19.add(label9);
-
-                //---- credText ----
-                credText.setColumns(10);
-                panel19.add(credText);
 
                 //======== panel20 ========
                 {
@@ -245,40 +237,42 @@ public class AddAuthorUIForm extends JFrame {
 
     private void handle() {
         addAuthorBtn.addActionListener(e -> {
-            try {
-                String state = stateText.getText();
-                String city = cityText.getText();
-                String street = streetText.getText();
-                int zip = Integer.parseInt(zipText.getText());
-                Address address = new Address(street,city,state, zipText.getText());
-                String lastName = lastNameText.getText();
-                String phoneNumber = phoneNumberText.getText();
-                String cred = credText.getText();
-                String firstName = firstNameTextField.getText();
-                String shortBio = shortBioText.getText();
 
-                if (!(state.isEmpty() &&
-                        city.isEmpty() &&
-                        street.isEmpty() &&
-                        lastName.isEmpty() &&
-                        firstName.isEmpty() &&
-                        phoneNumber.isEmpty() &&
-                        cred.isEmpty() &&
-                        shortBio.isEmpty()
-                )) {
-                    Author author = new Author(firstName,
-                            lastName,
-                            phoneNumber,
-                            address,
-                            shortBio);
-                    SystemController.getInstance().addAuthors(author);
-                    setVisible(false);
-                    dispose();
-                } else JOptionPane.showMessageDialog(AddAuthorUIForm.this, "Provide all data");
-            } catch (NumberFormatException err) {
-                err.printStackTrace();
-                JOptionPane.showMessageDialog(AddAuthorUIForm.this, "Provide correct data");
-            }
+            String state = stateText.getText();
+            String city = cityText.getText();
+            String street = streetText.getText();
+
+            Address address = new Address(street, city, state, zipText.getText());
+            String lastName = lastNameText.getText();
+            String phoneNumber = phoneNumberText.getText();
+            String firstName = firstNameTextField.getText();
+            String shortBio = shortBioText.getText();
+
+            if (!(state.isEmpty() &&
+                    city.isEmpty() &&
+                    street.isEmpty() &&
+                    lastName.isEmpty() &&
+                    firstName.isEmpty() &&
+                    phoneNumber.isEmpty() &&
+                    shortBio.isEmpty()
+            )) {
+                Author author = new Author(firstName,
+                        lastName,
+                        phoneNumber,
+                        address,
+                        shortBio);
+                SystemController.getInstance().addAuthors(author);
+
+                stateText.setText("");
+                cityText.setText("");
+                streetText.setText("");
+                lastNameText.setText("");
+                phoneNumberText.setText("");
+                firstNameTextField.setText("");
+                shortBioText.setText("");
+
+            } else JOptionPane.showMessageDialog(AddAuthorUIForm.this, "Provide all data");
+
 
         });
     }
