@@ -78,7 +78,7 @@ public class SystemController {
 	}
 
 
-	public void addBookCopy(String isbn, int copyNumber, AddBookCopyUIForm bookCopyUIForm) {
+	public void addBookCopy(String isbn, int copyNumber) {
 
 		Book book = dataAccess.searchBook(isbn);
 		if (book != null) {
@@ -86,10 +86,9 @@ public class SystemController {
 			for(int i=0 ; i<copyNumber; i++)
 				book.addCopy();
 			dataAccess.saveNewBookCopy(book);
-			bookCopyUIForm.displayBookAddedUI();
-
+			JOptionPane.showMessageDialog(null, "Book copy added");
 		} else {
-			bookCopyUIForm.displayBookNotFoundUI();
+			JOptionPane.showMessageDialog(null, "The book is not found.");
 		}
 
 	}

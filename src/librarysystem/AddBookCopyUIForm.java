@@ -9,17 +9,22 @@ import business.SystemController;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * @author Ali ziwa
- */
 public class AddBookCopyUIForm extends JFrame {
+    private JLabel label1;
+    private JPanel panel1;
+    private JPanel panel4;
+    private JButton addCopyBtn;
+    private JPanel panel2;
+    private JLabel label2;
+    private JTextField copyNumberTextField;
+    private JPanel panel3;
+    private JLabel label3;
+    private JTextField isbnTextField;
     public AddBookCopyUIForm() {
         initComponents();
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Ali ziwa
         label1 = new JLabel();
         panel1 = new JPanel();
         panel4 = new JPanel();
@@ -98,7 +103,8 @@ public class AddBookCopyUIForm extends JFrame {
                 int copyNumber = Integer.parseInt(copyNumberTextField.getText());
 
                 if (!(isbn.isEmpty())) {
-                    SystemController.getInstance().addBookCopy(isbn, copyNumber, AddBookCopyUIForm.this);
+                    SystemController.getInstance().addBookCopy(isbn, copyNumber);
+
                 } else JOptionPane.showMessageDialog(AddBookCopyUIForm.this, "Enter all fields.");
             } catch (NumberFormatException err) {
                 JOptionPane.showMessageDialog(AddBookCopyUIForm.this, "Copy number must be a numeric value");
@@ -106,25 +112,7 @@ public class AddBookCopyUIForm extends JFrame {
         });
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Ali ziwa
-    private JLabel label1;
-    private JPanel panel1;
-    private JPanel panel4;
-    private JButton addCopyBtn;
-    private JPanel panel2;
-    private JLabel label2;
-    private JTextField copyNumberTextField;
-    private JPanel panel3;
-    private JLabel label3;
-    private JTextField isbnTextField;
 
-    public void displayBookNotFoundUI() {
-        JOptionPane.showMessageDialog(this, "The book is not found.");
-    }
 
-    public void displayBookAddedUI() {
-        JOptionPane.showMessageDialog(this, "Book copy added");
-    }
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
 }
