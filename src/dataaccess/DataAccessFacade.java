@@ -37,9 +37,8 @@ public class DataAccessFacade implements DataAccess {
             String memberId = member.getMemberId();
             mems.put(memberId, member);
             saveToStorage(StorageType.MEMBERS, mems);
-        }
-        else{
-          //  showMessageDialog( "Enter all credentials");
+        } else {
+            //  showMessageDialog( "Enter all credentials");
         }
     }
 
@@ -54,16 +53,7 @@ public class DataAccessFacade implements DataAccess {
     }
 
     @Override
-    public boolean searchMember(String memberId) {
-        HashMap<String, LibraryMember> libraryMembers = readMemberMap();
-        for (Map.Entry map : libraryMembers.entrySet()) {
-            //LibraryMember getMember = (LibraryMember) map.getValue();
-            if (memberId == map.getValue()) {
-                return true;
-            }
-        }
-        return false;
-    }
+    public boolean searchMember(String memberId) {return false;}
 
     @Override
     public Book searchBook(String isbn) {
