@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 
 public class ReturnBookUI extends JFrame {
     private JButton getStatusButton, returnButton;
-    private JLabel memberID, bookISBN, bookStatus;
-    private JTextField memberIDInput, bookISBNInput, bookStatusOutput;
+    private JLabel memberID, bookCopyNumber, bookStatus;
+    private JTextField memberIDInput, bookCopyNumberInput, bookStatusOutput;
     private JPanel returnInput,mainPanel;
 
     public ReturnBookUI() throws HeadlessException {
@@ -21,8 +21,8 @@ public class ReturnBookUI extends JFrame {
     private void initComponents(){
         memberID = new JLabel("Input Member ID");
         memberIDInput = new JTextField(10);
-        bookISBN = new JLabel("Input Book ISBN");
-        bookISBNInput = new JTextField(13);
+        bookCopyNumber = new JLabel("Input Book Copy Number");
+        bookCopyNumberInput = new JTextField(13);
         getStatusButton=new JButton("Show");
         returnButton = new JButton("Returned");
         returnInput = new JPanel();
@@ -34,8 +34,8 @@ public class ReturnBookUI extends JFrame {
         returnInput.setLayout(new GridLayout(5,2,4,4));
         returnInput.add(memberID);
         returnInput.add(memberIDInput);
-        returnInput.add(bookISBN);
-        returnInput.add(bookISBNInput);
+        returnInput.add(bookCopyNumber);
+        returnInput.add(bookCopyNumberInput);
         returnInput.add(bookStatus);
         returnInput.add(bookStatusOutput);
         returnInput.add(getStatusButton);
@@ -51,10 +51,10 @@ public class ReturnBookUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String memberId = memberIDInput.getText();
-                String isbn = bookISBNInput.getText();
-//                if ((!memberId.isEmpty() && !isbn.isEmpty()))
-                 //   SystemController.getInstance().due(memberId,isbn, ReturnBookUI.this);
-//                else JOptionPane.showMessageDialog(ReturnBookUI.this, "Please fill out all fields.");
+                String bookCopyNumber = bookCopyNumberInput.getText();
+                if ((!memberId.isEmpty() && !bookCopyNumber.isEmpty()))
+                    SystemController.getInstance().due(memberId,bookCopyNumber, ReturnBookUI.this);
+                else JOptionPane.showMessageDialog(ReturnBookUI.this, "Please fill out all fields.");
  }
         });
 
@@ -74,7 +74,7 @@ public class ReturnBookUI extends JFrame {
         JOptionPane.showMessageDialog(this, "Member not available");
     }
 
-    public void displayPayementSuccess() {
+    public void displayDuePayementSuccess() {
         JOptionPane.showMessageDialog(this, "due payment success");
     }
 }

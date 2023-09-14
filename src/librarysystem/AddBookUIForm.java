@@ -138,8 +138,7 @@ public class AddBookUIForm extends JFrame {
 
                 if ((!title.isEmpty() && !isbnText.isEmpty() && !authorsList.isEmpty())) {
                     SystemController.getInstance().addBook(title, isbnText, authorsList);
-                    successText.setForeground(Color.green);
-                    successText.setVisible(true);
+
                 } else {
                     JOptionPane.showMessageDialog(AddBookUIForm.this, "Please provide all information.");
                     successText.setVisible(false);

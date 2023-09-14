@@ -1,8 +1,9 @@
 package business;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class CheckOutRecordEntry {
+public class CheckOutRecordEntry implements Serializable {
 	private LocalDate dateofCheckout;
 	private LocalDate dueDate;
 	private double fines;
@@ -26,7 +27,6 @@ public class CheckOutRecordEntry {
 	public LocalDate getDueDate() {
 		return dueDate;
 	}
-
 
 	public double getFines() {
 		return fines;
@@ -60,5 +60,16 @@ public class CheckOutRecordEntry {
 	public void setCheckOutRecord(CheckOutRecord checkOutRecord) {
 		this.checkOutRecord = checkOutRecord;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "CheckOutRecordEntry{" +
+				"dateofCheckout=" + dateofCheckout +
+				", dueDate=" + dueDate +
+				", fines=" + fines +
+				", dateReturned=" + dateReturned +
+				", bookCopy=" + bookCopy +
+				", checkOutRecord=" + checkOutRecord +
+				'}';
+	}
 }

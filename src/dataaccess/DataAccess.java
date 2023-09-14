@@ -17,7 +17,7 @@ public interface DataAccess {
 	//any database interaction include here
 	public void saveNewMember(LibraryMember libraryMember);
 	public void saveNewBook(Book book);
-	public void saveNewBookCopy(BookCopy bookCopy);
+	public void saveNewBookCopy(Book book);
 	public boolean searchMember(String memberId);
 	public Book searchBook(String isbn);
 	public int getMaximumCheckoutLength(String isbn);
@@ -25,4 +25,5 @@ public interface DataAccess {
 	public void saveMemberCheckoutRecord(String memberId, CheckOutRecordEntry entry);
 	public Auth verifyUser(int id, String password);
 	public List<CheckOutRecordEntry> getCheckOutRecord(String memberId);
+	public LibraryMember getMember(String memberId);
 }

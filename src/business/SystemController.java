@@ -1,5 +1,7 @@
 package business;
 
+import java.lang.reflect.Member;
+import java.time.Period;
 import java.util.*;
 
 import dataaccess.Auth;
@@ -89,8 +91,9 @@ public class SystemController {
 		Book book = dataAccess.searchBook(isbn);
 		if (book != null) {
 			BookCopy bookCopy = new BookCopy(book,book.getNumCopies());
-			book.addCopy();
-			dataAccess.saveNewBookCopy(bookCopy);
+			for(int i=0 ; i<copyNumber; i++)
+				book.addCopy();
+			dataAccess.saveNewBookCopy(book);
 			bookCopyUIForm.displayBookAddedUI();
 
 		} else {
@@ -123,7 +126,15 @@ public class SystemController {
 
 	public void addBook(String title, String isbn, List<Author> authors) {
 		Book book = new Book(isbn, title, 10, authors);
-		dataAccess.saveNewBook(book);
+		if(dataAccess.searchBook(isbn) !=null){
+			JOptionPane.showMessageDialog(null, "Book already exists please go to Add Book copy to add more copies");
+		}
+		else if(authors.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Please enter an Author for the book");
+		}else{
+			dataAccess.saveNewBook(book);
+			JOptionPane.showMessageDialog(null, "Book Added Successfully");
+		}
 	}
 
 	public List<Author> getAuthorsList() {
@@ -133,7 +144,16 @@ public class SystemController {
 
 	public void addAuthors(Author author) {
 		if (authorsList == null) authorsList = new ArrayList<>();
-		authorsList.add(author);
+		String telephone = author.getTelephone();
+		String zip = author.getAddress().getZip();
+		try{
+			Integer.parseInt(telephone);
+			Integer.parseInt(zip);
+			authorsList.add(author);
+		}catch (NumberFormatException ex){
+			JOptionPane.showMessageDialog(null, "Phone number & Zip code must be a numbers.");
+		}
+
 	}
 
 	public void login(int id, String password, LoginWindow loginWindow) {
@@ -150,41 +170,35 @@ public class SystemController {
 	}
 
 	// for return book
-//	public void due(String memberId, String isbn, ReturnBookUI returnBookUI){
-//
-//		LocalDate todaysDate = LocalDate.now();
-//		LocalDate checkoutData =
-//				Book book = dataAccess.searchBook(isbn);
-//
-//		if (dataAccess.searchMember(memberId) && book != null) {
-//
-//			BookCopy availableBookCopy = dataAccess.nextAvailableBookCopy(isbn);
-//
-//			if (availableBookCopy == null) {
-//				ReturnBookUI.displayBookUnavailable();
-//			} else {
-//
-//				LocalDate todaysDate = LocalDate.now();
-//				int checkOutLength = dataAccess.getMaximumCheckoutLength(isbn);
-//				LocalDate dueDate = todaysDate.plusDays(checkOutLength);
-//
-//				CheckOutRecordEntry checkoutRecordEntry = new CheckOutRecordEntry(todaysDate, dueDate, availableBookCopy);
-//				availableBookCopy.changeAvailability();
-//
-//				dataAccess.saveMemberCheckoutRecord(memberId, checkoutRecordEntry);
-//				ReturnBookUI.displayCheckoutSuccess();
-//
-//			}
-//
-//		} else if (!dataAccess.searchMember(memberId)) {
-//			ReturnBookUI.displayMemberUnavailable();
-//
-//		} else if (dataAccess.searchBook(isbn) == null) {
-//			ReturnBookUI.displayBookUnavailable();
-//		}
-//
-//	}
-//
-//	}
-}
+	public void due(String memberId, String bookCopyId, ReturnBookUI returnBookUI){
+
+		int bookCopy= Integer.parseInt(bookCopyId);
+		double totalDuedateFines=0.0;
+		LocalDate todaysDate = LocalDate.now();
+		Book book = dataAccess.searchBook(bookCopyId);
+		LibraryMember member= dataAccess.getMember(memberId);
+		CheckOutRecord checkOutRecord = member.getCheckOutRecord();
+		List<CheckOutRecordEntry>  checkOutRecordEntries= checkOutRecord.getCheckOutRecordEntries();
+		for (CheckOutRecordEntry checkOutRecordEntry :checkOutRecordEntries) {
+			if(checkOutRecordEntry.getBookCopy().getCopyNum() == bookCopy ){
+			LocalDate dueDate = checkOutRecordEntry.getDueDate();
+			if(dueDate.isBefore(todaysDate))
+				totalDuedateFines = ((int) (todaysDate.toEpochDay() - dueDate.toEpochDay())) * checkOutRecordEntry.getFines();
+			}
+		}
+		JOptionPane.showMessageDialog(null, "the fine payment is."+ totalDuedateFines);
+
+
+
+
+
+if (!dataAccess.searchMember(memberId)) {
+	returnBookUI.displayMemberUnavailable();
+
+		} else if (dataAccess.searchBook(bookCopyId) == null) {
+	returnBookUI.displayBookUnavailable();
+		}
+		}
+	}
+
 
