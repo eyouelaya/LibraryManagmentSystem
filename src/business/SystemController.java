@@ -32,11 +32,21 @@ public class SystemController {
 
 	public void addMember(String memberNo, String firstName, String lastName, String phoneNumber,
 						  String state, String city, String street, String zip) {
+		try {
+			int memberId = Integer.parseInt(memberNo);
+			int zipCode = Integer.parseInt(zip);
+			int phone = Integer.parseInt(phoneNumber);
 
-		Address address = addAddress(state, city, street, zip);
-		LibraryMember libraryMember = new LibraryMember(memberNo, firstName, lastName, phoneNumber, address);
+			Address address = addAddress(state, city, street, zip);
+			LibraryMember libraryMember = new LibraryMember(memberNo, firstName, lastName, phoneNumber, address);
 
-		dataAccess.saveNewMember(libraryMember);
+			dataAccess.saveNewMember(libraryMember);
+			JOptionPane.showMessageDialog(null, "Member id added");
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Member Id, Zip and phoneNumber should be a number");
+		}
+
+
 
 
 	}

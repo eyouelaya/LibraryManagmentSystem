@@ -216,7 +216,6 @@ public class AddMemberUIForm extends JFrame {
                         streetText,
                         cityText,
                         zipText);
-                JOptionPane.showMessageDialog(AddMemberUIForm.this, "Member id added");
             } else JOptionPane.showMessageDialog(AddMemberUIForm.this, "Enter all credentials");
         });
     }

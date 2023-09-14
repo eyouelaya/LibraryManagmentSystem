@@ -15,6 +15,8 @@ import business.CheckOutRecordEntry;
 import business.LibraryMember;
 import dataaccess.DataAccessFacade.StorageType;
 
+import javax.swing.*;
+
 
 public class DataAccessFacade implements DataAccess {
 	
@@ -29,12 +31,16 @@ public class DataAccessFacade implements DataAccess {
 	
 	//implement: other save operations
 	public void saveNewMember(LibraryMember member) {
-		HashMap<String, LibraryMember> mems = readMemberMap();
-		String memberId = member.getMemberId();
-		mems.put(memberId, member);
-		saveToStorage(StorageType.MEMBERS, mems);	
+		if (!searchMember(member.getMemberId())) {
+			HashMap<String, LibraryMember> mems = readMemberMap();
+			String memberId = member.getMemberId();
+			mems.put(memberId, member);
+			saveToStorage(StorageType.MEMBERS, mems);
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "Member Id already exist");
+		}
 	}
-
 	@Override
 	public void saveNewBook(Book book) {
 		List<Book> newBook = new ArrayList<>();
