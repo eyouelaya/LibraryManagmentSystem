@@ -28,4 +28,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-/src/dataaccess/storage/BOOKS
+/src/dataaccess/storage/
