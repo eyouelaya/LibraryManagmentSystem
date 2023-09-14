@@ -199,7 +199,7 @@ public class LoginWindow extends JFrame implements LibWindow {
 						if (!(passInput.isEmpty() && id.isEmpty()))
 							SystemController.getInstance().login(integerId, passInput, LoginWindow.this);
 					} catch (NumberFormatException err) {
-						JOptionPane.showMessageDialog(LoginWindow.this, "Invalid id");
+						JOptionPane.showMessageDialog(LoginWindow.this, "Invalid id or password");
 					}
 				}
 			});
