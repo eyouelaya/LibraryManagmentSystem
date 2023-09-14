@@ -46,17 +46,13 @@ public class DataAccessFacade implements DataAccess {
 		List<Book> newBook = new ArrayList<>();
 		newBook.add(book);
 		loadBookMap(newBook);
-
-		HashMap<String, Book> list =  readBooksMap();
-		for(Map.Entry m :list.entrySet()){
-			System.out.println(m.getValue());
-		}
-
 	}
 
 	@Override
-	public void saveNewBookCopy(BookCopy bookCopy) {
-
+	public void saveNewBookCopy(Book book) {
+		HashMap<String, Book> books = readBooksMap();
+		books.put(book.getIsbn(),book);
+		saveToStorage(StorageType.BOOKS, books);
 	}
 
 	@Override
