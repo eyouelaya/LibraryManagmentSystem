@@ -5,10 +5,12 @@ import dataaccess.Auth;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainView extends JFrame {
 
-    private JButton addBook, addMember, checkOutBook, addBookCopy, printCheckoutRecord;
+    private JButton addBook, addMember, checkOutBook, addBookCopy, printCheckoutRecord, returnBook;
     private Auth role;
 
     MainView(Auth role) {
@@ -18,6 +20,7 @@ public class MainView extends JFrame {
         addMember = new JButton("Add member");
         checkOutBook = new JButton("Checkout book");
         printCheckoutRecord = new JButton("Print checkout record");
+        returnBook = new JButton("Return Book");
         this.role = role;
 
         setInsets(addBook, addMember, checkOutBook, addBookCopy, printCheckoutRecord);
@@ -26,7 +29,7 @@ public class MainView extends JFrame {
         mainPanel.add(addMember);
         mainPanel.add(checkOutBook);
         mainPanel.add(printCheckoutRecord);
-
+        mainPanel.add(returnBook);
         switch (role) {
             case LIBRARIAN: {
                 addMember.setVisible(false);
@@ -36,6 +39,7 @@ public class MainView extends JFrame {
             }
             case ADMIN:
                 checkOutBook.setVisible(false);
+                returnBook.setVisible(false);
                 printCheckoutRecord.setVisible(false);
                 break;
         }
@@ -50,24 +54,45 @@ public class MainView extends JFrame {
     }
 
     private void handle() {
-        addMember.addActionListener(e -> {
-            new AddMemberUIForm().setVisible(true);
+        addMember.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddMemberUIForm().setVisible(true);
+            }
         });
 
-        addBook.addActionListener(e -> {
-            new AddBookUIForm().setVisible(true);
+        addBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddBookUIForm().setVisible(true);
+            }
         });
 
-        checkOutBook.addActionListener(e -> {
-            new CheckOutUIForm().setVisible(true);
+        checkOutBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CheckOutUIForm().setVisible(true);
+            }
         });
 
-        addBookCopy.addActionListener(e -> {
-            new AddBookCopyUIForm().setVisible(true);
+        addBookCopy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddBookCopyUIForm().setVisible(true);
+            }
         });
 
-        printCheckoutRecord.addActionListener(e -> {
-            new CheckoutRecordPrintUI().setVisible(true);
+        printCheckoutRecord.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CheckoutRecordPrintUI().setVisible(true);
+            }
+        });
+        returnBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ReturnBookUI().setVisible(true);
+            }
         });
 
     }

@@ -1,8 +1,6 @@
 package business;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import dataaccess.Auth;
 import dataaccess.DataAccess;
@@ -150,4 +148,43 @@ public class SystemController {
 	private Address addAddress(String state, String city, String street, String zip) {
 		return new Address(state, city, street, zip);
 	}
+
+	// for return book
+//	public void due(String memberId, String isbn, ReturnBookUI returnBookUI){
+//
+//		LocalDate todaysDate = LocalDate.now();
+//		LocalDate checkoutData =
+//				Book book = dataAccess.searchBook(isbn);
+//
+//		if (dataAccess.searchMember(memberId) && book != null) {
+//
+//			BookCopy availableBookCopy = dataAccess.nextAvailableBookCopy(isbn);
+//
+//			if (availableBookCopy == null) {
+//				ReturnBookUI.displayBookUnavailable();
+//			} else {
+//
+//				LocalDate todaysDate = LocalDate.now();
+//				int checkOutLength = dataAccess.getMaximumCheckoutLength(isbn);
+//				LocalDate dueDate = todaysDate.plusDays(checkOutLength);
+//
+//				CheckOutRecordEntry checkoutRecordEntry = new CheckOutRecordEntry(todaysDate, dueDate, availableBookCopy);
+//				availableBookCopy.changeAvailability();
+//
+//				dataAccess.saveMemberCheckoutRecord(memberId, checkoutRecordEntry);
+//				ReturnBookUI.displayCheckoutSuccess();
+//
+//			}
+//
+//		} else if (!dataAccess.searchMember(memberId)) {
+//			ReturnBookUI.displayMemberUnavailable();
+//
+//		} else if (dataAccess.searchBook(isbn) == null) {
+//			ReturnBookUI.displayBookUnavailable();
+//		}
+//
+//	}
+//
+//	}
 }
+
