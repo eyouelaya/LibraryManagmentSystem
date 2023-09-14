@@ -61,7 +61,7 @@ public class SystemController {
 				LocalDate dueDate = todaysDate.plusDays(checkOutLength);
 
 				CheckOutRecordEntry checkoutRecordEntry = new CheckOutRecordEntry(todaysDate, dueDate, availableBookCopy);
-				availableBookCopy.changeAvailability();
+				dataAccess.updateBook(availableBookCopy);
 
 				dataAccess.saveMemberCheckoutRecord(memberId, checkoutRecordEntry);
 				checkOutUIForm.displayCheckoutSuccess();
