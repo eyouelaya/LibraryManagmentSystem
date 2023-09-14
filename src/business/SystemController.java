@@ -91,8 +91,9 @@ public class SystemController {
 		Book book = dataAccess.searchBook(isbn);
 		if (book != null) {
 			BookCopy bookCopy = new BookCopy(book,book.getNumCopies());
-			book.addCopy();
-			dataAccess.saveNewBookCopy(bookCopy);
+			for(int i=0 ; i<copyNumber; i++)
+				book.addCopy();
+			dataAccess.saveNewBookCopy(book);
 			bookCopyUIForm.displayBookAddedUI();
 
 		} else {
