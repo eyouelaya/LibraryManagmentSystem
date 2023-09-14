@@ -80,6 +80,7 @@ public class LoginWindow extends JFrame implements LibWindow {
     		getContentPane().add(mainPanel);
     		isInitialized(true);
     		pack();
+			setDefaultCloseOperation(EXIT_ON_CLOSE);
     		//setSize(660, 500);
 
     	

@@ -1,20 +1,14 @@
 package business;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
-import dataaccess.User;
 import librarysystem.*;
-
 
 import javax.swing.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SystemController {
 
@@ -37,7 +31,7 @@ public class SystemController {
 			int zipCode = Integer.parseInt(zip);
 			int phone = Integer.parseInt(phoneNumber);
 
-			Address address = addAddress(state, city, street, zip);
+			Address address = new Address(state, city, street, zip);
 			LibraryMember libraryMember = new LibraryMember(memberNo, firstName, lastName, phoneNumber, address);
 
 			dataAccess.saveNewMember(libraryMember);
@@ -45,8 +39,6 @@ public class SystemController {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Member Id, Zip and phoneNumber should be a number");
 		}
-
-
 
 
 	}
@@ -165,7 +157,4 @@ public class SystemController {
 		}
 	}
 
-	private Address addAddress(String state, String city, String street, String zip) {
-		return new Address(state, city, street, zip);
-	}
 }
