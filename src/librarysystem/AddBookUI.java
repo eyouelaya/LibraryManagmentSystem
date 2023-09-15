@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Wed Oct 07 11:03:49 CDT 2020
- */
-
 package librarysystem;
 
 import business.Author;
@@ -13,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class AddBookUIForm extends JFrame {
+public class AddBookUI extends JFrame {
     private JLabel label1;
     private JButton addBook;
     private JPanel panel1;
@@ -29,7 +25,7 @@ public class AddBookUIForm extends JFrame {
     private JComboBox<Integer> checkoutLengthSelector;
     private JButton addAuthorBtn;
     private JLabel checkoutLabel;
-    public AddBookUIForm() {
+    public AddBookUI() {
         initComponents();
     }
 
@@ -135,7 +131,7 @@ public class AddBookUIForm extends JFrame {
 
     private void handle() {
         addAuthorBtn.addActionListener(e -> {
-            new AddAuthorUIForm().setVisible(true);
+            new AddAuthorUI().setVisible(true);
         });
 
         addBook.addActionListener(new ActionListener() {
@@ -151,7 +147,7 @@ public class AddBookUIForm extends JFrame {
                     SystemController.getInstance().addBook(title, isbnText, Integer.parseInt(checkOutLength),authorsList);
 
                 } else {
-                    JOptionPane.showMessageDialog(AddBookUIForm.this, "Please provide all information.");
+                    JOptionPane.showMessageDialog(AddBookUI.this, "Please provide all information.");
                     successText.setVisible(false);
                 }
             }

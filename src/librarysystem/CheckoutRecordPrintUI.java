@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Wed Oct 07 15:09:27 CDT 2020
- */
-
 package librarysystem;
 
 import business.CheckOutRecordEntry;
@@ -11,17 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-/**
- * @author Ali ziwa
- */
+
 public class CheckoutRecordPrintUI extends JFrame {
     public CheckoutRecordPrintUI() {
         initComponents();
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Ali ziwa
         panel1 = new JPanel();
         label1 = new JLabel();
         memberIdText = new JTextField();
@@ -60,7 +52,6 @@ public class CheckoutRecordPrintUI extends JFrame {
         setLocationRelativeTo(getOwner());
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
         GuiProperties.centerFrameOnDesktop(this);
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents
         handle();
     }
 
@@ -73,8 +64,6 @@ public class CheckoutRecordPrintUI extends JFrame {
         });
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Ali ziwa
     private JPanel panel1;
     private JLabel label1;
     private JTextField memberIdText;
@@ -93,5 +82,4 @@ public class CheckoutRecordPrintUI extends JFrame {
     public void showRecords(List<CheckOutRecordEntry> recordEntries) {
         recordEntryTable.setModel(new TableModel(recordEntries));
     }
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

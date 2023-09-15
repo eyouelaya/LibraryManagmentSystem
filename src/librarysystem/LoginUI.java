@@ -18,14 +18,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JOptionPane;
 
-import business.ControllerInterface;
-import business.LoginException;
 import business.SystemController;
 import dataaccess.Auth;
 
 
-public class LoginWindow extends JFrame implements LibWindow {
-    public static final LoginWindow INSTANCE = new LoginWindow();
+public class LoginUI extends JFrame {
+    public static final LoginUI INSTANCE = new LoginUI();
 	
 	private boolean isInitialized = false;
 	
@@ -63,7 +61,7 @@ public class LoginWindow extends JFrame implements LibWindow {
 	}
 	
 	/* This class is a singleton */
-    public LoginWindow () {
+    public LoginUI() {
 		init();
 	}
     public void init() {     		
@@ -198,9 +196,9 @@ public class LoginWindow extends JFrame implements LibWindow {
 					try {
 						integerId = Integer.parseInt(id);
 						if (!(passInput.isEmpty() && id.isEmpty()))
-							SystemController.getInstance().login(integerId, passInput, LoginWindow.this);
+							SystemController.getInstance().login(integerId, passInput, LoginUI.this);
 					} catch (NumberFormatException err) {
-						JOptionPane.showMessageDialog(LoginWindow.this, "Invalid id or password");
+						JOptionPane.showMessageDialog(LoginUI.this, "Invalid id or password");
 					}
 				}
 			});

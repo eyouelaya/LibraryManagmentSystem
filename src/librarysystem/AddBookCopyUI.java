@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Wed Oct 07 04:04:41 CDT 2020
- */
-
 package librarysystem;
 
 import business.SystemController;
@@ -9,7 +5,7 @@ import business.SystemController;
 import javax.swing.*;
 import java.awt.*;
 
-public class AddBookCopyUIForm extends JFrame {
+public class AddBookCopyUI extends JFrame {
     private JLabel label1;
     private JPanel panel1;
     private JPanel panel4;
@@ -20,7 +16,7 @@ public class AddBookCopyUIForm extends JFrame {
     private JPanel panel3;
     private JLabel label3;
     private JTextField isbnTextField;
-    public AddBookCopyUIForm() {
+    public AddBookCopyUI() {
         initComponents();
     }
 
@@ -92,7 +88,6 @@ public class AddBookCopyUIForm extends JFrame {
         setLocationRelativeTo(getOwner());
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
         GuiProperties.centerFrameOnDesktop(this);
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents
         handle();
     }
 
@@ -105,9 +100,9 @@ public class AddBookCopyUIForm extends JFrame {
                 if (!(isbn.isEmpty())) {
                     SystemController.getInstance().addBookCopy(isbn, copyNumber);
 
-                } else JOptionPane.showMessageDialog(AddBookCopyUIForm.this, "Enter all fields.");
+                } else JOptionPane.showMessageDialog(AddBookCopyUI.this, "Enter all fields.");
             } catch (NumberFormatException err) {
-                JOptionPane.showMessageDialog(AddBookCopyUIForm.this, "Copy number must be a numeric value");
+                JOptionPane.showMessageDialog(AddBookCopyUI.this, "Copy number must be a numeric value");
             }
         });
     }

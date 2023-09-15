@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Wed Oct 07 03:20:13 CDT 2020
- */
-
 package librarysystem;
 
 import business.SystemController;
@@ -10,11 +6,37 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class AddMemberUIForm extends JFrame {
-    public AddMemberUIForm() {
+public class AddMemberUI extends JFrame {
+    public AddMemberUI() {
         initComponents();
     }
-
+    private JLabel label1;
+    private JPanel panel1;
+    private JPanel panel4;
+    private JLabel label4;
+    private JTextField memberID;
+    private JPanel panel3;
+    private JLabel label3;
+    private JTextField firstName;
+    private JPanel panel2;
+    private JLabel label2;
+    private JTextField lastName;
+    private JPanel panel6;
+    private JLabel label6;
+    private JTextField phoneNumber;
+    private JPanel panel5;
+    private JLabel label5;
+    private JTextField state;
+    private JPanel panel7;
+    private JLabel label7;
+    private JTextField city;
+    private JPanel panel8;
+    private JLabel label8;
+    private JTextField zip;
+    private JPanel panel9;
+    private JLabel label9;
+    private JTextField street;
+    private JButton addNewMember;
     private void initComponents() {
         label1 = new JLabel();
         panel1 = new JPanel();
@@ -216,39 +238,10 @@ public class AddMemberUIForm extends JFrame {
                         streetText,
                         cityText,
                         zipText);
-            } else JOptionPane.showMessageDialog(AddMemberUIForm.this, "Enter all credentials");
+            } else JOptionPane.showMessageDialog(AddMemberUI.this, "Enter all credentials");
         });
     }
 
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Ali ziwa
-    private JLabel label1;
-    private JPanel panel1;
-    private JPanel panel4;
-    private JLabel label4;
-    private JTextField memberID;
-    private JPanel panel3;
-    private JLabel label3;
-    private JTextField firstName;
-    private JPanel panel2;
-    private JLabel label2;
-    private JTextField lastName;
-    private JPanel panel6;
-    private JLabel label6;
-    private JTextField phoneNumber;
-    private JPanel panel5;
-    private JLabel label5;
-    private JTextField state;
-    private JPanel panel7;
-    private JLabel label7;
-    private JTextField city;
-    private JPanel panel8;
-    private JLabel label8;
-    private JTextField zip;
-    private JPanel panel9;
-    private JLabel label9;
-    private JTextField street;
-    private JButton addNewMember;
 
 }

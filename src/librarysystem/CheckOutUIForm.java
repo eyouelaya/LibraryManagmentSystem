@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Wed Oct 07 02:47:13 CDT 2020
- */
-
 package librarysystem;
 
 import business.SystemController;

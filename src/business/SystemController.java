@@ -154,7 +154,7 @@ public class SystemController {
 
     }
 
-    public void login(int id, String password, LoginWindow loginWindow) {
+    public void login(int id, String password, LoginUI loginWindow) {
         Auth role = dataAccess.verifyUser(id, password);
         if (role == null)
             loginWindow.displayLoginError();

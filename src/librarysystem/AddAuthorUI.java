@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class AddAuthorUIForm extends JFrame {
+public class AddAuthorUI extends JFrame {
 
     private JLabel label1;
     private JPanel panel21;
@@ -42,13 +42,11 @@ public class AddAuthorUIForm extends JFrame {
     private JLabel label10;
     private JTextField shortBioText;
 
-    public AddAuthorUIForm() {
+    public AddAuthorUI() {
         initComponents();
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Ali ziwa
         label1 = new JLabel();
         panel21 = new JPanel();
         addAuthorBtn = new JButton();
@@ -231,7 +229,6 @@ public class AddAuthorUIForm extends JFrame {
         setLocationRelativeTo(getOwner());
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
         GuiProperties.centerFrameOnDesktop(this);
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents
         handle();
     }
 
@@ -272,7 +269,7 @@ public class AddAuthorUIForm extends JFrame {
                 shortBioText.setText("");
                 zipText.setText("");
 
-            } else JOptionPane.showMessageDialog(AddAuthorUIForm.this, "Provide all data");
+            } else JOptionPane.showMessageDialog(AddAuthorUI.this, "Provide all data");
 
 
         });

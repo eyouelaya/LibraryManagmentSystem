@@ -57,14 +57,14 @@ public class MainView extends JFrame {
         addMember.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddMemberUIForm().setVisible(true);
+                new AddMemberUI().setVisible(true);
             }
         });
 
         addBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddBookUIForm().setVisible(true);
+                new AddBookUI().setVisible(true);
             }
         });
 
@@ -78,7 +78,7 @@ public class MainView extends JFrame {
         addBookCopy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddBookCopyUIForm().setVisible(true);
+                new AddBookCopyUI().setVisible(true);
             }
         });
 
