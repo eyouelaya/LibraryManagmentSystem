@@ -62,7 +62,7 @@ public class SystemController {
             } else {
 
                 LocalDate todaysDate = LocalDate.now();
-                int checkOutLength = dataAccess.getMaximumCheckoutLength(isbn);
+                int checkOutLength = book.getMaxCheckoutLength();
                 LocalDate dueDate = todaysDate.plusDays(checkOutLength);
 
                 CheckOutRecordEntry checkoutRecordEntry = new CheckOutRecordEntry(todaysDate, dueDate, availableBookCopy);
@@ -123,8 +123,8 @@ public class SystemController {
 
     }
 
-    public void addBook(String title, String isbn, List<Author> authors) {
-        Book book = new Book(isbn, title, 10, authors);
+    public void addBook(String title, String isbn, int checkoutLength, List<Author> authors) {
+        Book book = new Book(isbn, title, checkoutLength, authors);
         if (dataAccess.searchBook(isbn) != null) {
             JOptionPane.showMessageDialog(null, "Book already exists please go to Add Book copy to add more copies");
         } else if (authors.isEmpty()) {
