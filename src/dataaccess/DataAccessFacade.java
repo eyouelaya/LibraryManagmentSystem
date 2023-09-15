@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.*;
 
 import business.*;
@@ -59,6 +60,18 @@ public class DataAccessFacade implements DataAccess {
 	}
 
 	@Override
+	public void updateBook(BookCopy bookCopy) {
+		HashMap<String,Book> bookHashMap = readBooksMap();
+		if(bookHashMap.containsKey(bookCopy.getBook().getIsbn())){
+			bookCopy.changeAvailability();
+			bookHashMap.put(bookCopy.getBook().getIsbn(), bookCopy.getBook());
+			saveToStorage(StorageType.BOOKS, bookHashMap);
+
+		}
+
+	}
+
+	@Override
 	public void saveNewBookCopy(Book book) {
 		HashMap<String, Book> books = readBooksMap();
 		books.put(book.getIsbn(),book);
@@ -69,6 +82,12 @@ public class DataAccessFacade implements DataAccess {
 	public boolean searchMember(String memberId) {
 		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
 		return libraryMemberHashMap.containsKey(memberId);
+	}
+
+	@Override
+	public LibraryMember getMember(String memberId) {
+		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
+		return libraryMemberHashMap.getOrDefault(memberId, null);
 	}
 
 	@Override
@@ -104,11 +123,26 @@ public class DataAccessFacade implements DataAccess {
 		LibraryMember libraryMember = libraryMemberHashMap.get(memberId);
 		if (libraryMember != null) {
 			libraryMember.addCheckOutRecordEntry(entry);
-
+			libraryMember.addCheckOutRecordEntry(entry);
 			this.updateMember(memberId,libraryMember);
 		}
 	}
 
+	@Override
+	public void returnBook(Book book, String memberId, int bookCopyId){
+		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
+		LibraryMember libraryMember = libraryMemberHashMap.get(memberId);
+		if (libraryMember != null) {
+			for(CheckOutRecordEntry e: libraryMember.getCheckOutRecord().getCheckOutRecordEntries()){
+				if(e.getDateReturned() == null && e.getBookCopy().getBook().getIsbn().equals(book.getIsbn())
+				&& e.getBookCopy().getCopyNum() == bookCopyId){
+					e.setDateReturned(LocalDate.now());
+					break;
+				}
+			}
+			this.updateMember(memberId,libraryMember);
+		}
+	}
 	@Override
 	public Auth verifyUser(int id, String password) {
 		HashMap<String,User> user = readUserMap();
@@ -122,8 +156,6 @@ public class DataAccessFacade implements DataAccess {
 	}
 
 
-
-
 	@Override
 	public List<CheckOutRecordEntry> getCheckOutRecord(String memberId) {
 		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
@@ -131,6 +163,8 @@ public class DataAccessFacade implements DataAccess {
 		CheckOutRecord checkOutRecord = libraryMember.getCheckOutRecord();
 		return checkOutRecord.getCheckOutRecordEntries();
 	}
+
+
 
 	@SuppressWarnings("unchecked")
 	public  HashMap<String,Book> readBooksMap() {

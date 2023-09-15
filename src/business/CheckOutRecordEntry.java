@@ -15,6 +15,7 @@ public class CheckOutRecordEntry implements Serializable {
 		this.dateofCheckout = dateofCheckout;
 		this.dueDate = dueDate;
 		this.bookCopy = bookCopy;
+		this.fines = 5;
 
 	}
 
@@ -27,7 +28,6 @@ public class CheckOutRecordEntry implements Serializable {
 	public LocalDate getDueDate() {
 		return dueDate;
 	}
-
 
 	public double getFines() {
 		return fines;
