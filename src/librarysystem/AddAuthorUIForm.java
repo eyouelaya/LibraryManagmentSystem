@@ -270,6 +270,7 @@ public class AddAuthorUIForm extends JFrame {
                 phoneNumberText.setText("");
                 firstNameTextField.setText("");
                 shortBioText.setText("");
+                zipText.setText("");
 
             } else JOptionPane.showMessageDialog(AddAuthorUIForm.this, "Provide all data");
 

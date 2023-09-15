@@ -26,8 +26,9 @@ public class AddBookUIForm extends JFrame {
     private JLabel label2;
     private JTextField isbnTextField;
     private JPanel panel4;
-    private JPanel bottom;
+    private JComboBox<Integer> checkoutLengthSelector;
     private JButton addAuthorBtn;
+    private JLabel checkoutLabel;
     public AddBookUIForm() {
         initComponents();
     }
@@ -46,7 +47,13 @@ public class AddBookUIForm extends JFrame {
         label2 = new JLabel();
         isbnTextField = new JTextField();
         panel4 = new JPanel();
+        checkoutLabel = new JLabel("Select Max Checkout Length");
         addAuthorBtn = new JButton();
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.addElement("7");
+        model.addElement("21");
+        checkoutLengthSelector = new JComboBox<>(model);
 
         //======== this ========
         var contentPane = getContentPane();
@@ -89,6 +96,8 @@ public class AddBookUIForm extends JFrame {
                 //---- bookTitle ----
                 bookTitle.setColumns(10);
                 panel3.add(bookTitle);
+                panel3.add(checkoutLabel);
+                panel3.add(checkoutLengthSelector);
             }
             panel1.add(panel3, BorderLayout.NORTH);
 
@@ -135,9 +144,11 @@ public class AddBookUIForm extends JFrame {
                 String title = bookTitle.getText();
                 String isbnText = isbnTextField.getText();
                 List<Author> authorsList = SystemController.getInstance().getAuthorsList();
+                String checkOutLength = (String) checkoutLengthSelector.getSelectedItem();
+
 
                 if ((!title.isEmpty() && !isbnText.isEmpty() && !authorsList.isEmpty())) {
-                    SystemController.getInstance().addBook(title, isbnText, authorsList);
+                    SystemController.getInstance().addBook(title, isbnText, Integer.parseInt(checkOutLength),authorsList);
 
                 } else {
                     JOptionPane.showMessageDialog(AddBookUIForm.this, "Please provide all information.");

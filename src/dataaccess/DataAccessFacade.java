@@ -97,32 +97,10 @@ public class DataAccessFacade implements DataAccess {
 	}
 
 	@Override
-	public int getMaximumCheckoutLength(String isbn) {
-		return 0;
-	}
-
-	@Override
-	public BookCopy nextAvailableBookCopy(String isbn) {
-		HashMap<String, Book> bookHashMap = readBooksMap();
-		Book book = bookHashMap.get(isbn);
-
-		if (book != null) {
-			for (BookCopy bookCopy : book.getCopies()) {
-				if (bookCopy.isAvailable()) {
-					return bookCopy;
-				}
-			}
-		}
-
-		return null;
-	}
-
-	@Override
 	public void saveMemberCheckoutRecord(String memberId, CheckOutRecordEntry entry) {
 		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
 		LibraryMember libraryMember = libraryMemberHashMap.get(memberId);
 		if (libraryMember != null) {
-			libraryMember.addCheckOutRecordEntry(entry);
 			libraryMember.addCheckOutRecordEntry(entry);
 			this.updateMember(memberId,libraryMember);
 		}

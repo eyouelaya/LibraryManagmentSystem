@@ -20,8 +20,6 @@ public interface DataAccess {
 	public void saveNewBookCopy(Book book);
 	public boolean searchMember(String memberId);
 	public Book searchBook(String isbn);
-	public int getMaximumCheckoutLength(String isbn);
-	public BookCopy nextAvailableBookCopy(String isbn );
 	public void saveMemberCheckoutRecord(String memberId, CheckOutRecordEntry entry);
 	public Auth verifyUser(int id, String password);
 	public List<CheckOutRecordEntry> getCheckOutRecord(String memberId);
