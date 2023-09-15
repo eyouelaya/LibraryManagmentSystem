@@ -27,4 +27,5 @@ public interface DataAccess {
 	public List<CheckOutRecordEntry> getCheckOutRecord(String memberId);
 	public LibraryMember getMember(String memberId);
 	public void returnBook(Book book,String memberId, int bookCopyId);
+	public void updateBook(BookCopy bookCopy);
 }

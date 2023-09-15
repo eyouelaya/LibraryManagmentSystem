@@ -60,6 +60,18 @@ public class DataAccessFacade implements DataAccess {
 	}
 
 	@Override
+	public void updateBook(BookCopy bookCopy) {
+		HashMap<String,Book> bookHashMap = readBooksMap();
+		if(bookHashMap.containsKey(bookCopy.getBook().getIsbn())){
+			bookCopy.changeAvailability();
+			bookHashMap.put(bookCopy.getBook().getIsbn(), bookCopy.getBook());
+			saveToStorage(StorageType.BOOKS, bookHashMap);
+
+		}
+
+	}
+
+	@Override
 	public void saveNewBookCopy(Book book) {
 		HashMap<String, Book> books = readBooksMap();
 		books.put(book.getIsbn(),book);
@@ -111,7 +123,7 @@ public class DataAccessFacade implements DataAccess {
 		LibraryMember libraryMember = libraryMemberHashMap.get(memberId);
 		if (libraryMember != null) {
 			libraryMember.addCheckOutRecordEntry(entry);
-
+			libraryMember.addCheckOutRecordEntry(entry);
 			this.updateMember(memberId,libraryMember);
 		}
 	}
@@ -144,8 +156,6 @@ public class DataAccessFacade implements DataAccess {
 	}
 
 
-
-
 	@Override
 	public List<CheckOutRecordEntry> getCheckOutRecord(String memberId) {
 		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
@@ -154,7 +164,7 @@ public class DataAccessFacade implements DataAccess {
 		return checkOutRecord.getCheckOutRecordEntries();
 	}
 
-	@Override
+
 
 	@SuppressWarnings("unchecked")
 	public  HashMap<String,Book> readBooksMap() {
