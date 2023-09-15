@@ -79,10 +79,8 @@ public class SystemController {
 
 
 	public void addBookCopy(String isbn, int copyNumber) {
-
 		Book book = dataAccess.searchBook(isbn);
 		if (book != null) {
-			BookCopy bookCopy = new BookCopy(book,book.getNumCopies());
 			for(int i=0 ; i<copyNumber; i++)
 				book.addCopy();
 			dataAccess.saveNewBookCopy(book);
