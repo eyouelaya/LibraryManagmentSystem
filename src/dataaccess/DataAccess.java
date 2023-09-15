@@ -26,4 +26,5 @@ public interface DataAccess {
 	public Auth verifyUser(int id, String password);
 	public List<CheckOutRecordEntry> getCheckOutRecord(String memberId);
 	public LibraryMember getMember(String memberId);
+	public void returnBook(Book book,String memberId, int bookCopyId);
 }

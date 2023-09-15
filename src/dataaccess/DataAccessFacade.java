@@ -7,12 +7,10 @@ import java.io.Serializable;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.*;
 
-import business.Book;
-import business.BookCopy;
-import business.CheckOutRecordEntry;
-import business.LibraryMember;
+import business.*;
 import dataaccess.DataAccessFacade.StorageType;
 
 import javax.swing.*;
@@ -41,6 +39,19 @@ public class DataAccessFacade implements DataAccess {
 			JOptionPane.showMessageDialog(null, "Member Id already exist");
 		}
 	}
+
+	//update member
+	public void updateMember(String memberId, LibraryMember newMemberInfo) {
+		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
+
+		if (libraryMemberHashMap.containsKey(memberId)) {
+			libraryMemberHashMap.put(memberId, newMemberInfo);
+			saveToStorage(StorageType.MEMBERS, libraryMemberHashMap);
+		} else {
+			JOptionPane.showMessageDialog(null, "Member Id does not exist");
+		}
+	}
+
 	@Override
 	public void saveNewBook(Book book) {
 		List<Book> newBook = new ArrayList<>();
@@ -96,9 +107,30 @@ public class DataAccessFacade implements DataAccess {
 
 	@Override
 	public void saveMemberCheckoutRecord(String memberId, CheckOutRecordEntry entry) {
+		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
+		LibraryMember libraryMember = libraryMemberHashMap.get(memberId);
+		if (libraryMember != null) {
+			libraryMember.addCheckOutRecordEntry(entry);
 
+			this.updateMember(memberId,libraryMember);
+		}
 	}
 
+	@Override
+	public void returnBook(Book book, String memberId, int bookCopyId){
+		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
+		LibraryMember libraryMember = libraryMemberHashMap.get(memberId);
+		if (libraryMember != null) {
+			for(CheckOutRecordEntry e: libraryMember.getCheckOutRecord().getCheckOutRecordEntries()){
+				if(e.getDateReturned() == null && e.getBookCopy().getBook().getIsbn().equals(book.getIsbn())
+				&& e.getBookCopy().getCopyNum() == bookCopyId){
+					e.setDateReturned(LocalDate.now());
+					break;
+				}
+			}
+			this.updateMember(memberId,libraryMember);
+		}
+	}
 	@Override
 	public Auth verifyUser(int id, String password) {
 		HashMap<String,User> user = readUserMap();
@@ -116,7 +148,10 @@ public class DataAccessFacade implements DataAccess {
 
 	@Override
 	public List<CheckOutRecordEntry> getCheckOutRecord(String memberId) {
-		return null;
+		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
+		LibraryMember libraryMember = libraryMemberHashMap.get(memberId);
+		CheckOutRecord checkOutRecord = libraryMember.getCheckOutRecord();
+		return checkOutRecord.getCheckOutRecordEntries();
 	}
 
 	@Override

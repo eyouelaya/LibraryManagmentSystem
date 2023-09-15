@@ -15,6 +15,7 @@ public class CheckOutRecordEntry implements Serializable {
 		this.dateofCheckout = dateofCheckout;
 		this.dueDate = dueDate;
 		this.bookCopy = bookCopy;
+		this.fines = 5;
 
 	}
 
