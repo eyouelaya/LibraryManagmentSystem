@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TableModel extends AbstractTableModel {
     private List<CheckOutRecordEntry> checkOutRecordEntryList;
-    private String[] columnNames = {"Book title", "Book Author", "Book id", "Checkout date", "Due date"};
+    private String[] columnNames = {"Book title", "Book Author", "Book id", "Checkout date", "Due date", "Return Date"};
 
     TableModel(List<CheckOutRecordEntry> checkOutRecordEntryList) {
         this.checkOutRecordEntryList = checkOutRecordEntryList;
@@ -47,8 +47,13 @@ public class TableModel extends AbstractTableModel {
             return bookCopy.getCopyNum();
         } else if (columnIndex == 3) {
             return checkOutRecordEntry.getDateofCheckout();
-        } else {
+        } else if(columnIndex == 4){
             return checkOutRecordEntry.getDueDate();
+        }
+        else{
+            if(checkOutRecordEntry.getDateReturned() == null)
+                return "Not Returned";
+            return checkOutRecordEntry.getDateReturned();
         }
     }
 

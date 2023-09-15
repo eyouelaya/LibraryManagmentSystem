@@ -123,7 +123,6 @@ public class DataAccessFacade implements DataAccess {
 		LibraryMember libraryMember = libraryMemberHashMap.get(memberId);
 		if (libraryMember != null) {
 			libraryMember.addCheckOutRecordEntry(entry);
-			libraryMember.addCheckOutRecordEntry(entry);
 			this.updateMember(memberId,libraryMember);
 		}
 	}

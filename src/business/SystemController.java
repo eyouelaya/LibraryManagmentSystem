@@ -53,7 +53,9 @@ public class SystemController {
 
         if (dataAccess.searchMember(memberId) && book != null) {
 
-            BookCopy availableBookCopy = dataAccess.nextAvailableBookCopy(isbn);
+            //BookCopy availableBookCopy = dataAccess.nextAvailableBookCopy(isbn);
+            BookCopy availableBookCopy = book.getNextAvailableCopy();
+            System.out.println(book.getCopies());
 
             if (availableBookCopy == null) {
                 checkOutUIForm.displayBookUnavailable();
@@ -64,7 +66,6 @@ public class SystemController {
                 LocalDate dueDate = todaysDate.plusDays(checkOutLength);
 
                 CheckOutRecordEntry checkoutRecordEntry = new CheckOutRecordEntry(todaysDate, dueDate, availableBookCopy);
-                availableBookCopy.changeAvailability();
 				dataAccess.updateBook(availableBookCopy);
 
                 dataAccess.saveMemberCheckoutRecord(memberId, checkoutRecordEntry);
