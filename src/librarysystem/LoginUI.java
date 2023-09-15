@@ -30,9 +30,6 @@ public class LoginUI extends JFrame {
 	private JPanel mainPanel;
 	private JPanel upperHalf;
 	private JPanel middleHalf;
-	private JPanel lowerHalf;
-	private JPanel container;
-	private JLabel message;
 	
 	private JPanel topPanel;
 	private JPanel middlePanel;
@@ -60,26 +57,23 @@ public class LoginUI extends JFrame {
 		messageBar.setText("");
 	}
 	
-	/* This class is a singleton */
+
     public LoginUI() {
 		init();
 	}
     public void init() {     		
     		mainPanel = new JPanel();
     		defineUpperHalf();
-    		defineMiddleHalf();
     		BorderLayout bl = new BorderLayout();
     		bl.setVgap(30);
     		mainPanel.setLayout(bl);
-			defineLowerHalf();
     		mainPanel.add(upperHalf, BorderLayout.NORTH);
-    		mainPanel.add(middleHalf, BorderLayout.CENTER);
-			mainPanel.add(lowerHalf,BorderLayout.SOUTH);
     		getContentPane().add(mainPanel);
     		isInitialized(true);
     		pack();
 			setDefaultCloseOperation(EXIT_ON_CLOSE);
-    		//setSize(660, 500);
+			setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
+			GuiProperties.centerFrameOnDesktop(this);
 
     	
     }
@@ -95,24 +89,7 @@ public class LoginUI extends JFrame {
     		upperHalf.add(lowerPanel, BorderLayout.SOUTH);
     		
     	}
-    	private void defineMiddleHalf() {
-    		middleHalf = new JPanel();
-    		middleHalf.setLayout(new BorderLayout());
-    		JSeparator s = new JSeparator();
-    		s.setOrientation(SwingConstants.HORIZONTAL);
-    		//middleHalf.add(Box.createRigidArea(new Dimension(0,50)));
-    		middleHalf.add(s, BorderLayout.SOUTH);
-    		
-    	}
-    	private void defineLowerHalf() {
 
-    		lowerHalf = new JPanel();
-    		lowerHalf.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-    		message = new JLabel();
-    		lowerHalf.add(message);
-
-    	}
     	private void defineTopPanel() {
     		topPanel = new JPanel();
     		JPanel intPanel = new JPanel(new BorderLayout());
@@ -120,7 +97,7 @@ public class LoginUI extends JFrame {
     		JLabel loginLabel = new JLabel("Login");
     		Util.adjustLabelFont(loginLabel, Color.BLUE.darker(), true);
     		intPanel.add(loginLabel, BorderLayout.CENTER);
-    		topPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+    		topPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
     		topPanel.add(intPanel);
     		
     	}
@@ -129,7 +106,7 @@ public class LoginUI extends JFrame {
     	
     	private void defineMiddlePanel() {
     		middlePanel=new JPanel();
-    		middlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+    		middlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
     		defineLeftTextPanel();
     		defineRightTextPanel();
     		middlePanel.add(leftTextPanel);
@@ -145,8 +122,8 @@ public class LoginUI extends JFrame {
     		
     		JPanel topText = new JPanel();
     		JPanel bottomText = new JPanel();
-    		topText.setLayout(new FlowLayout(FlowLayout.LEFT,5,0));
-    		bottomText.setLayout(new FlowLayout(FlowLayout.LEFT,5,0));		
+    		topText.setLayout(new FlowLayout(FlowLayout.CENTER,5,0));
+    		bottomText.setLayout(new FlowLayout(FlowLayout.CENTER,5,0));
     		
     		username = new JTextField(10);
     		label = new JLabel("Username");
@@ -179,8 +156,9 @@ public class LoginUI extends JFrame {
     	}
     	
     	public void displayLoginError() {
-    		message.setText("Login Error");
-    	}
+			JOptionPane.showMessageDialog(LoginUI.this, "Login Error");
+
+		}
 
 		public void login(Auth role) {
 		MainView mainView = new MainView(role);
