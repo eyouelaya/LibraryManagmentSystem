@@ -1,5 +1,6 @@
 package librarysystem;
 
+import Toaster.Toaster;
 import Utils.TextFieldUsername;
 import Utils.UIUtils;
 import business.SystemController;
@@ -14,6 +15,7 @@ public class ReturnBookUI extends JFrame {
     private JLabel memberID, bookCopyNumber, bookStatus, bookISBN;
     private TextFieldUsername memberIDInput, bookCopyNumberInput, bookStatusOutput, bookISBNInput;
     private JPanel returnInput, mainPanel;
+    private Toaster toaster;
 
     public ReturnBookUI() throws HeadlessException {
         initComponents();
@@ -74,6 +76,7 @@ public class ReturnBookUI extends JFrame {
         returnInput.setBackground(UIUtils.COLOR_BACKGROUND);
         mainPanel.add(returnInput);
         add(mainPanel);
+        toaster = new Toaster(mainPanel);
         mainPanel.setBackground(UIUtils.COLOR_BACKGROUND);
         setBackground(UIUtils.COLOR_BACKGROUND);
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
@@ -105,7 +108,7 @@ public class ReturnBookUI extends JFrame {
 
                 if ((!memberId.isEmpty() && !bookCopyNumber.isEmpty() && !bookCopyNumber.isEmpty()))
                     SystemController.getInstance().due(memberId, bookISBN, bookCopyNumber, ReturnBookUI.this);
-                else JOptionPane.showMessageDialog(ReturnBookUI.this, "Please fill out all fields.");
+                else toaster.error("Please fill out all fields.");
                 returnButton.setEnabled(false);
             }
         });
@@ -114,7 +117,7 @@ public class ReturnBookUI extends JFrame {
 
 
     public void displayBookUnavailable() {
-        JOptionPane.showMessageDialog(this, "Book not available");
+       toaster.error("Book not available");
     }
 
     public void displayMemberUnavailable() {
