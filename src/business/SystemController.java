@@ -91,7 +91,6 @@ public class SystemController {
             for (int i = 0; i < copyNumber; i++)
                 book.addCopy();
             dataAccess.saveNewBookCopy(book);
-            JOptionPane.showMessageDialog(null, "Book copy added");
 
 
         } else {
