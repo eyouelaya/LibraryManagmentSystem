@@ -50,7 +50,7 @@ public class MainView extends JFrame {
         getOverDueBooks = uiUtils.createCustomLabel("\uD83D\uDCD3 Get Overdue Book", e -> { new GetOverDueUI().setVisible(true);});
         getOverDueBooks.setBorder(paddingBorder);
 
-        logoutButton = uiUtils.createCustomLabel("\uD83D\uDCD3 LogOut", e -> {
+        logoutButton = uiUtils.createCustomLabel("⛔ LogOut", e -> {
             MainView.this.setVisible(false);
             new LoginUI().setVisible(true);});
         logoutButton.setBorder(paddingBorder);
