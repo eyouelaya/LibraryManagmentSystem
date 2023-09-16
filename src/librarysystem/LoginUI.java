@@ -1,7 +1,6 @@
 package librarysystem;
 
 import Toaster.Toaster;
-import Utils.HyperlinkText;
 import Utils.TextFieldPassword;
 import Utils.TextFieldUsername;
 import Utils.UIUtils;
@@ -42,17 +41,15 @@ public class LoginUI extends JFrame {
         this.pack();
         this.setVisible(true);
         this.toFront();
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
-
+        setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
+        GuiProperties.centerFrameOnDesktop(this);
         toaster = new Toaster(mainJPanel);
     }
 
     private JPanel getMainJPanel() {
-        this.setUndecorated(true);
+        this.setUndecorated(false);
 
-        Dimension size = new Dimension(800, 400);
+        Dimension size = new Dimension(830, 400);
 
         JPanel panel1 = new JPanel();
         panel1.setSize(size);
@@ -237,5 +234,6 @@ public class LoginUI extends JFrame {
     public void login(Auth role) {
         MainView mainView = new MainView(role);
         mainView.setVisible(true);
+        LoginUI.this.setVisible(false);
     }
 }

@@ -6,17 +6,11 @@ import dataaccess.Auth;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import librarysystem.AddBookUI;
 
 public class MainView extends JFrame {
 
     private Auth role;
-    private JLabel addBook, addMember, checkOutBook, addBookCopy, printCheckoutRecord, returnBook, getOverDueBooks;
+    private JLabel logoutButton,addBook, addMember, checkOutBook, addBookCopy, printCheckoutRecord, returnBook, getOverDueBooks;
     private UIUtils uiUtils = new UIUtils();
 
     MainView(Auth role) {
@@ -50,6 +44,12 @@ public class MainView extends JFrame {
         getOverDueBooks = uiUtils.createCustomLabel("\uD83D\uDCD3 Get Overdue Book", e -> { new GetOverDueUI().setVisible(true);});
         getOverDueBooks.setBorder(paddingBorder);
 
+        logoutButton = uiUtils.createCustomLabel("⛔ LogOut", e -> {
+            MainView.this.setVisible(false);
+            new LoginUI().setVisible(true);});
+        logoutButton.setBorder(paddingBorder);
+        logoutButton.setBackground(UIUtils.COLOR_OUTLINE);
+
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
         GuiProperties.centerFrameOnDesktop(this);
         mainPanel.add(addBook);
@@ -59,6 +59,7 @@ public class MainView extends JFrame {
         mainPanel.add(printCheckoutRecord);
         mainPanel.add(returnBook);
         mainPanel.add(getOverDueBooks);
+        mainPanel.add(logoutButton);
         mainPanel.setBackground(UIUtils.COLOR_BACKGROUND);
 
         switch (role) {
@@ -71,6 +72,7 @@ public class MainView extends JFrame {
                 checkOutBook.setVisible(false);
                 returnBook.setVisible(false);
                 printCheckoutRecord.setVisible(false);
+                getOverDueBooks.setVisible(false);
                 break;
         }
 

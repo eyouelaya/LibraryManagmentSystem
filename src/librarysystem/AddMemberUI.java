@@ -81,6 +81,7 @@ public class AddMemberUI extends JFrame {
         topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         mainPanel= new JPanel();
+        toaster = new Toaster(mainPanel);
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
 
 

@@ -68,6 +68,10 @@ public class CheckOutUIForm extends JFrame {
         setBackground(UIUtils.COLOR_BACKGROUND);
         checkoutButton.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
 
+        JPanel inputPanel = new JPanel(new GridLayout(3,4,10,10));
+
+
+
         //======== panel5 ========
         {
             panel5.setPreferredSize(null);
@@ -127,9 +131,21 @@ public class CheckOutUIForm extends JFrame {
             }
             panel5.add(panel4);
         }
-        add(panel5, BorderLayout.CENTER);
+
         panel5.setBackground(UIUtils.COLOR_BACKGROUND);
-        toaster = new Toaster(panel5);
+        toaster = new Toaster(inputPanel);
+
+        inputPanel.add(label3);
+        inputPanel.add(memberIDTextField);
+        inputPanel.add(label2);
+        inputPanel.add(isbnTextField);
+        inputPanel.add(new JLabel(""));
+        inputPanel.add(checkoutButton);
+        inputPanel.setBackground(UIUtils.COLOR_BACKGROUND);
+        JPanel mainpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        mainpanel.setBackground(UIUtils.COLOR_BACKGROUND);
+        mainpanel.add(inputPanel);
+        add(mainpanel, BorderLayout.CENTER);
 
         setBackground(UIUtils.COLOR_BACKGROUND);
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
