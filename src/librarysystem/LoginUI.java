@@ -38,10 +38,6 @@ public class LoginUI extends JFrame {
 
         addLoginButton(mainJPanel);
 
-        addForgotPasswordButton(mainJPanel);
-
-        addRegisterButton(mainJPanel);
-
         this.add(mainJPanel);
         this.pack();
         this.setVisible(true);
@@ -220,17 +216,6 @@ public class LoginUI extends JFrame {
         panel1.add(loginButton);
     }
 
-    private void addForgotPasswordButton(JPanel panel1) {
-        panel1.add(new HyperlinkText(UIUtils.BUTTON_TEXT_FORGOT_PASS, 423, 300, () -> {
-            toaster.error("Forgot password event");
-        }));
-    }
-
-    private void addRegisterButton(JPanel panel1) {
-        panel1.add(new HyperlinkText(UIUtils.BUTTON_TEXT_REGISTER, 631, 300, () -> {
-            toaster.success("Register event");
-        }));
-    }
 
     private void loginEventHandler() {
         String passInput = passwordField.getText();
@@ -241,12 +226,12 @@ public class LoginUI extends JFrame {
             if (!(passInput.isEmpty() && id.isEmpty()))
                 SystemController.getInstance().login(integerId, passInput, LoginUI.this);
         } catch (NumberFormatException err) {
-            toaster.error("wrong login credentials");
+            toaster.error("All Fields Required");
         }
     }
 
     public void displayLoginError(){
-        toaster.error("wrong login credentials");
+        toaster.error("wrong login credentials ⚠");
     }
 
     public void login(Auth role) {
