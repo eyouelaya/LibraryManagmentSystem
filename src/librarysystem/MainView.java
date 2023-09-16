@@ -4,15 +4,20 @@ import Utils.UIUtils;
 import dataaccess.Auth;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import librarysystem.AddBookUI;
 
 public class MainView extends JFrame {
 
-    private JButton addBook, addMember, checkOutBook, addBookCopy, printCheckoutRecord, returnBook, getOverDueBooks;
     private Auth role;
+    private JLabel addBook, addMember, checkOutBook, addBookCopy, printCheckoutRecord, returnBook, getOverDueBooks;
+    private UIUtils uiUtils = new UIUtils();
 
     MainView(Auth role) {
         this.role = role;
@@ -27,14 +32,23 @@ public class MainView extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
+        EmptyBorder paddingBorder = new EmptyBorder(10, 10, 10, 10);
+
         JPanel mainPanel = new JPanel(new GridLayout(6, 1));
-        addBook = createStyledButton("Add Book", new Color(0, 128, 0));
-        addBookCopy = createStyledButton("Add Book Copy", new Color(0, 128, 0));
-        addMember = createStyledButton("Add Member", new Color(0, 128, 0));
-        checkOutBook = createStyledButton("Checkout Book", new Color(0, 128, 128));
-        printCheckoutRecord = createStyledButton("Print Checkout Record", new Color(0, 128, 128));
-        returnBook = createStyledButton("Return Book", new Color(0, 128, 128));
-        getOverDueBooks = createStyledButton("Get Overdue Books", new Color(0, 128, 128));
+        addBook = uiUtils.createCustomLabel("Add Book", e -> { new AddBookUI().setVisible(true);});
+        addBook.setBorder(paddingBorder);
+        addBookCopy = uiUtils.createCustomLabel("Add Book Copy", e -> {new AddBookCopyUI().setVisible(true);});
+        addBookCopy.setBorder(paddingBorder);
+        addMember = uiUtils.createCustomLabel("Add Member", e -> { new AddMemberUI().setVisible(true);});
+        addMember.setBorder(paddingBorder);
+        checkOutBook = uiUtils.createCustomLabel("Book Checkout", e -> { new CheckOutUIForm().setVisible(true);});
+        checkOutBook.setBorder(paddingBorder);
+        printCheckoutRecord = uiUtils.createCustomLabel("Print Checkout Record", e -> {  new CheckoutRecordPrintUI().setVisible(true);});
+        printCheckoutRecord.setBorder(paddingBorder);
+        returnBook = uiUtils.createCustomLabel("Return Book", e -> {new ReturnBookUI().setVisible(true);});
+        returnBook.setBorder(paddingBorder);
+        getOverDueBooks = uiUtils.createCustomLabel("Get Overdue Book", e -> { new GetOverDueUI().setVisible(true);});
+        getOverDueBooks.setBorder(paddingBorder);
 
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
         GuiProperties.centerFrameOnDesktop(this);
@@ -63,49 +77,9 @@ public class MainView extends JFrame {
         add(mainPanel);
     }
 
-    private JButton createStyledButton(String text, Color bgColor) {
-        JButton button = new JButton(text);
-        button.setBackground(bgColor);
-        button.setForeground(Color.WHITE);
-        button.setFont(new Font("Arial", Font.PLAIN, 16));
-        button.setBorderPainted(false);
-        button.setFocusPainted(false);
-        button.setMargin(new Insets(10, 20, 10, 20));
-        return button;
-    }
 
 
     private void handle() {
-        addMember.addActionListener(e -> {
-            new AddMemberUI().setVisible(true);
-        });
-
-        addBook.addActionListener(e -> {
-            new AddBookUI().setVisible(true);
-        });
-
-        checkOutBook.addActionListener(e -> {
-            new CheckOutUIForm().setVisible(true);
-        });
-
-        addBookCopy.addActionListener(e -> {
-            new AddBookCopyUI().setVisible(true);
-        });
-
-        printCheckoutRecord.addActionListener(e -> {
-            new CheckoutRecordPrintUI().setVisible(true);
-        });
-
-        returnBook.addActionListener(e -> {
-            new ReturnBookUI().setVisible(true);
-        });
-
-        getOverDueBooks.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new GetOverDueUI().setVisible(true);
-            }
-        });
     }
 
 
