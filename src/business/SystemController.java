@@ -166,6 +166,9 @@ public class SystemController {
         double totalDuedateFines = 0.0;
         LocalDate todaysDate = LocalDate.now();
         LibraryMember member = dataAccess.getMember(memberId);
+        if (member == null) {
+            JOptionPane.showMessageDialog(null, "member does not exist");
+        }
         CheckOutRecord checkOutRecord = member.getCheckOutRecord();
         List<CheckOutRecordEntry> checkOutRecordEntries = checkOutRecord.getCheckOutRecordEntries();
         boolean bookFound = false, returned = false;
@@ -211,6 +214,9 @@ public class SystemController {
         double totalDuedateFines = 0.0;
         LocalDate todaysDate = LocalDate.now();
         LibraryMember member = dataAccess.getMember(memberId);
+        if (member == null) {
+            JOptionPane.showMessageDialog(null, "member does not exist");
+        }
         CheckOutRecord checkOutRecord = member.getCheckOutRecord();
         List<CheckOutRecordEntry> checkOutRecordEntries = checkOutRecord.getCheckOutRecordEntries();
         boolean bookFound = false, returned = false;
