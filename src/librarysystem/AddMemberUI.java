@@ -1,5 +1,8 @@
 package librarysystem;
 
+import Toaster.Toaster;
+import Utils.TextFieldUsername;
+import Utils.UIUtils;
 import business.SystemController;
 
 import javax.swing.*;
@@ -7,201 +10,119 @@ import java.awt.*;
 
 
 public class AddMemberUI extends JFrame {
+    private Toaster toaster;
     public AddMemberUI() {
         initComponents();
     }
-    private JLabel label1;
-    private JPanel panel1;
-    private JPanel panel4;
-    private JLabel label4;
-    private JTextField memberID;
-    private JPanel panel3;
-    private JLabel label3;
-    private JTextField firstName;
-    private JPanel panel2;
-    private JLabel label2;
-    private JTextField lastName;
-    private JPanel panel6;
-    private JLabel label6;
-    private JTextField phoneNumber;
-    private JPanel panel5;
-    private JLabel label5;
-    private JTextField state;
-    private JPanel panel7;
-    private JLabel label7;
-    private JTextField city;
-    private JPanel panel8;
-    private JLabel label8;
-    private JTextField zip;
-    private JPanel panel9;
-    private JLabel label9;
-    private JTextField street;
+    private JLabel title, memberIdLabel;
+    private JPanel topPanel,bottomPanel,middlePanel, mainPanel;
     private JButton addNewMember;
+    private JLabel firstName;
+    private TextFieldUsername firstNameTextField,memberID, lastNameText,phoneNumberText,cityText,stateText,zipText,streetText;;
+    private JLabel lastName;
+
+    private JLabel phoneNumber;
+    private JLabel city;
+    private JLabel state;
+    private JLabel zip;
+    private JLabel street;
+    private JLabel shortBio;
     private void initComponents() {
-        label1 = new JLabel();
-        panel1 = new JPanel();
-        panel4 = new JPanel();
-        label4 = new JLabel();
-        memberID = new JTextField();
-        panel3 = new JPanel();
-        label3 = new JLabel();
-        firstName = new JTextField();
-        panel2 = new JPanel();
-        label2 = new JLabel();
-        lastName = new JTextField();
-        panel6 = new JPanel();
-        label6 = new JLabel();
-        phoneNumber = new JTextField();
-        panel5 = new JPanel();
-        label5 = new JLabel();
-        state = new JTextField();
-        panel7 = new JPanel();
-        label7 = new JLabel();
-        city = new JTextField();
-        panel8 = new JPanel();
-        label8 = new JLabel();
-        zip = new JTextField();
-        panel9 = new JPanel();
-        label9 = new JLabel();
-        street = new JTextField();
-        addNewMember = new JButton();
+        title = new JLabel("Add Member");
+        title.setFont(UIUtils.FONT_GENERAL_UI);
+        title.setForeground(Color.white);
+
+        addNewMember = new JButton("Add Member");
+        addNewMember.setFont(new Font("Arial", Font.PLAIN, 16));
+        addNewMember.setBackground(new Color(0, 128, 0));
+        addNewMember.setOpaque(true);
+        addNewMember.setBorderPainted(false);
+        addNewMember.setForeground(Color.WHITE);
+        memberIdLabel = new JLabel("Member ID");
+        memberIdLabel.setFont(UIUtils.FONT_GENERAL_UI);
+        memberIdLabel.setForeground(Color.white);
+        memberID = new TextFieldUsername();
+        firstName = new JLabel("First Name");
+        firstName.setFont(UIUtils.FONT_GENERAL_UI);
+        firstName.setForeground(Color.white);
+        firstNameTextField = new TextFieldUsername();
+        firstNameTextField.setColumns(10);
+        lastName = new JLabel("Last Name");
+        lastName.setFont(UIUtils.FONT_GENERAL_UI);
+        lastName.setForeground(Color.white);
+        lastNameText = new TextFieldUsername();
+        lastNameText.setColumns(10);
+        phoneNumber = new JLabel("Phone Number");
+        phoneNumber.setForeground(Color.white);
+        phoneNumber.setFont(UIUtils.FONT_GENERAL_UI);
+        phoneNumberText = new TextFieldUsername();
+        phoneNumberText.setColumns(10);
+        city = new JLabel("City");
+        city.setFont(UIUtils.FONT_GENERAL_UI);
+        city.setForeground(Color.white);
+        cityText = new TextFieldUsername();
+        cityText.setColumns(10);
+        state = new JLabel("State");
+        state.setFont(UIUtils.FONT_GENERAL_UI);
+        state.setForeground(Color.white);
+        stateText = new TextFieldUsername();
+        stateText.setColumns(10);
+        zip = new JLabel("Zip");
+        zip.setFont(UIUtils.FONT_GENERAL_UI);
+        zip.setForeground(Color.white);
+        zipText = new TextFieldUsername();
+        zipText.setColumns(10);
+        street = new JLabel("Street");
+        street.setFont(UIUtils.FONT_GENERAL_UI);
+        street.setForeground(Color.white);
+        streetText = new TextFieldUsername();
+        streetText.setColumns(10);
+        middlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        mainPanel= new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.Y_AXIS));
 
 
-        var contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout(8, 8));
+        JPanel inputPanel = new JPanel(new GridLayout(5,4,10,10));
+        inputPanel.add(memberIdLabel);
+        inputPanel.add(memberID);
+        inputPanel.add(firstName);
+        inputPanel.add(firstNameTextField);
+        inputPanel.add(lastName);
+        inputPanel.add(lastNameText);
+        inputPanel.add(phoneNumber);
+        inputPanel.add(phoneNumberText);
+        inputPanel.add(city);
+        inputPanel.add(cityText);
+        inputPanel.add(state);
+        inputPanel.add(stateText);
+        inputPanel.add(zip);
+        inputPanel.add(zipText);
+        inputPanel.add(street);
+        inputPanel.add(streetText);
+
+        topPanel.add(title);
+        middlePanel.add(inputPanel);
+        bottomPanel.add(addNewMember);
+        mainPanel.add(topPanel);
+        mainPanel.add(middlePanel);
+        mainPanel.add(bottomPanel);
+
+        add(mainPanel);
+
+        inputPanel.setBackground(UIUtils.COLOR_BACKGROUND);
+        topPanel.setBackground(UIUtils.COLOR_BACKGROUND);
+        bottomPanel.setBackground(UIUtils.COLOR_BACKGROUND);
+        middlePanel.setBackground(UIUtils.COLOR_BACKGROUND);
+        mainPanel.setBackground(UIUtils.COLOR_BACKGROUND);
 
 
 
-        label1.setText("Add new member");
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        contentPane.add(label1, BorderLayout.NORTH);
-
-
-
-        {
-            panel1.setLayout(new FlowLayout());
-
-
-            {
-                panel4.setLayout(new FlowLayout());
-
-
-
-                label4.setText("Member ID");
-                panel4.add(label4);
-
-
-                memberID.setColumns(10);
-                panel4.add(memberID);
-
-
-
-                {
-                    panel3.setLayout(new FlowLayout());
-
-                    //---- label3 ----
-                    label3.setText("First Name");
-                    panel3.add(label3);
-
-                    //---- firstName ----
-                    firstName.setColumns(10);
-                    panel3.add(firstName);
-                }
-                panel4.add(panel3);
-            }
-            panel1.add(panel4);
-
-            //======== panel2 ========
-            {
-                panel2.setLayout(new FlowLayout());
-
-                //---- label2 ----
-                label2.setText("Last Name");
-                panel2.add(label2);
-
-                //---- lastName ----
-                lastName.setColumns(10);
-                panel2.add(lastName);
-
-                //======== panel6 ========
-                {
-                    panel6.setLayout(new FlowLayout());
-
-                    //---- label6 ----
-                    label6.setText("Phone number");
-                    panel6.add(label6);
-
-                    //---- phoneNumber ----
-                    phoneNumber.setColumns(10);
-                    panel6.add(phoneNumber);
-                }
-                panel2.add(panel6);
-            }
-            panel1.add(panel2);
-
-            //======== panel5 ========
-            {
-                panel5.setLayout(new FlowLayout());
-
-                //---- label5 ----
-                label5.setText("State");
-                panel5.add(label5);
-
-                //---- state ----
-                state.setColumns(10);
-                panel5.add(state);
-            }
-            panel1.add(panel5);
-
-            //======== panel7 ========
-            {
-                panel7.setLayout(new FlowLayout());
-
-                //---- label7 ----
-                label7.setText("City");
-                panel7.add(label7);
-
-                //---- city ----
-                city.setColumns(10);
-                panel7.add(city);
-            }
-            panel1.add(panel7);
-
-            //======== panel8 ========
-            {
-                panel8.setLayout(new FlowLayout());
-
-                //---- label8 ----
-                label8.setText("Zip");
-                panel8.add(label8);
-
-                //---- zip ----
-                zip.setColumns(10);
-                panel8.add(zip);
-            }
-            panel1.add(panel8);
-
-            //======== panel9 ========
-            {
-                panel9.setLayout(new FlowLayout());
-
-                //---- label9 ----
-                label9.setText("street");
-                panel9.add(label9);
-
-                //---- street ----
-                street.setColumns(10);
-                panel9.add(street);
-            }
-            panel1.add(panel9);
-        }
-        contentPane.add(panel1, BorderLayout.CENTER);
-
-        //---- addNewMember ----
-        addNewMember.setText("Add new member");
-        contentPane.add(addNewMember, BorderLayout.SOUTH);
         pack();
         setLocationRelativeTo(getOwner());
+
+        setBackground(UIUtils.COLOR_BACKGROUND);
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
         GuiProperties.centerFrameOnDesktop(this);
 
@@ -211,37 +132,36 @@ public class AddMemberUI extends JFrame {
 
     private void handle() {
         addNewMember.addActionListener(e -> {
-            String firstNameText = firstName.getText();
-            String lastNameText = lastName.getText();
-            String phoneNumberText = phoneNumber.getText();
-            String stateText = state.getText();
-            String streetText = street.getText();
-            String memberIDText = memberID.getText();
-            String cityText = city.getText();
-            String zipText = zip.getText();
+            String firstNameTextInput = firstNameTextField.getText();
+            String lastNameTextInput = lastNameText.getText();
+            String phoneNumberTextInput = phoneNumberText.getText();
+            String stateTextInput = stateText.getText();
+            String streetTextInput = streetText.getText();
+            String memberIDTextInput = memberID.getText();
+            String cityTextInput = cityText.getText();
+            String zipTextInput = zipText.getText();
 
-            if (!(firstNameText.isEmpty() &&
-                    lastNameText.isEmpty() &&
-                    phoneNumberText.isEmpty() &&
-                    stateText.isEmpty() &&
-                    streetText.isEmpty() &&
-                    memberIDText.isEmpty() &&
-                    cityText.isEmpty() &&
-                    zipText.isEmpty())) {
+            if (!(firstNameTextInput.isEmpty() &&
+                    lastNameTextInput.isEmpty() &&
+                    phoneNumberTextInput.isEmpty() &&
+                    stateTextInput.isEmpty() &&
+                    streetTextInput.isEmpty() &&
+                    memberIDTextInput.isEmpty() &&
+                    cityTextInput.isEmpty() &&
+                    zipTextInput.isEmpty())) {
 
                 SystemController.getInstance().addMember(
-                        memberIDText,
-                        firstNameText,
-                        lastNameText,
-                        phoneNumberText,
-                        stateText,
-                        streetText,
-                        cityText,
-                        zipText);
-            } else JOptionPane.showMessageDialog(AddMemberUI.this, "Enter all credentials");
+                        memberIDTextInput,
+                        firstNameTextInput,
+                        lastNameTextInput,
+                        phoneNumberTextInput,
+                        stateTextInput,
+                        cityTextInput,
+                        streetTextInput,
+                        zipTextInput);
+            } else toaster.error("All fields are required");
         });
     }
-
 
 
 }

@@ -1,5 +1,9 @@
 package librarysystem;
 
+import Utils.CustomWideComboBox;
+import Utils.TextFieldUsername;
+import Utils.UIUtils;
+import Toaster.Toaster;
 import business.Author;
 import business.SystemController;
 
@@ -10,15 +14,18 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class AddBookUI extends JFrame {
+
+    private Toaster toaster;
+
     private JLabel titleLabel;
     private JButton addButton;
     private JPanel mainPanel;
     private JLabel successLabel;
     private JLabel bookTitleLabel;
-    private JTextField bookTitleField;
+    private TextFieldUsername bookTitleField;
     private JLabel isbnLabel;
-    private JTextField isbnField;
-    private JComboBox<Integer> checkoutLengthSelector;
+    private TextFieldUsername isbnField;
+    private CustomWideComboBox checkoutLengthSelector;
     private JButton addAuthorButton;
     private JLabel checkoutLengthLabel;
 
@@ -29,14 +36,19 @@ public class AddBookUI extends JFrame {
 
     private void initComponents() {
         titleLabel = new JLabel("Add Book");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(Color.white);
+        titleLabel.setFont(UIUtils.FONT_GENERAL_UI);
 
         addButton = new JButton("Add Book");
-        addButton.setBackground(new Color(0, 128, 0));
-        addButton.setForeground(Color.WHITE);
         addButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        addButton.setBackground(new Color(0, 128, 0));
+        addButton.setOpaque(true);
+        addButton.setBorderPainted(false);
+        addButton.setForeground(Color.WHITE);
+
 
         mainPanel = new JPanel(new GridBagLayout());
+        toaster = new Toaster(mainPanel);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         successLabel = new JLabel("Book Added Successfully!");
@@ -45,19 +57,31 @@ public class AddBookUI extends JFrame {
         successLabel.setVisible(false);
 
         bookTitleLabel = new JLabel("Book Title:");
-        bookTitleField = new JTextField(20);
+        bookTitleLabel.setForeground(Color.white);
+        bookTitleLabel.setFont(UIUtils.FONT_GENERAL_UI);
+        bookTitleField = new TextFieldUsername();
+        bookTitleField.setColumns(20);
 
         isbnLabel = new JLabel("ISBN:");
-        isbnField = new JTextField(20);
+        isbnLabel.setForeground(Color.white);;
+        isbnLabel.setFont(UIUtils.FONT_GENERAL_UI);
+        isbnField = new TextFieldUsername();
+        isbnField.setColumns(20);
 
-        checkoutLengthLabel = new JLabel("Select Max Checkout Length:");
+        checkoutLengthLabel = new JLabel("Max Checkout Length:");
+        checkoutLengthLabel.setForeground(Color.white);
+        checkoutLengthLabel.setFont(UIUtils.FONT_GENERAL_UI);
         DefaultComboBoxModel<Integer> model = new DefaultComboBoxModel<>();
         model.addElement(7);
         model.addElement(21);
-        checkoutLengthSelector = new JComboBox<>(model);
+        String items [] = {"7","21"};
+        checkoutLengthSelector = new CustomWideComboBox(items);
 
         addAuthorButton = new JButton("Add Authors");
-        addAuthorButton.setBackground(new Color(0, 128, 128));
+        addAuthorButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        addAuthorButton.setBackground(new Color(0, 128, 0));
+        addAuthorButton.setOpaque(true);
+        addAuthorButton.setBorderPainted(false);
         addAuthorButton.setForeground(Color.WHITE);
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -104,6 +128,7 @@ public class AddBookUI extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
+        mainPanel.setBackground(UIUtils.COLOR_BACKGROUND);
         GuiProperties.centerFrameOnDesktop(this);
     }
 
@@ -114,13 +139,14 @@ public class AddBookUI extends JFrame {
                 String title = bookTitleField.getText();
                 String isbnText = isbnField.getText();
                 List<Author> authorsList = SystemController.getInstance().getAuthorsList();
-                int checkOutLength = (int) checkoutLengthSelector.getSelectedItem();
+                String checkOutLengthString =(String) checkoutLengthSelector.getSelectedItem();
+                int checkOutLength = Integer.parseInt(checkOutLengthString);
 
                 if ((!title.isEmpty() && !isbnText.isEmpty() && !authorsList.isEmpty())) {
                     SystemController.getInstance().addBook(title, isbnText, checkOutLength, authorsList);
                     successLabel.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(AddBookUI.this, "Please provide all information.");
+                    toaster.error("All fields are required");
                     successLabel.setVisible(false);
                 }
             }

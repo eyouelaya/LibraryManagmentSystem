@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JLabel;
 
 public class Util {
+
 	public static final Color DARK_BLUE = Color.BLUE.darker();
 	public static final Color ERROR_MESSAGE_COLOR = Color.RED.darker(); //dark red
 	public static final Color INFO_MESSAGE_COLOR = new Color(24, 98, 19); //dark green

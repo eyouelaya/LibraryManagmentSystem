@@ -82,7 +82,7 @@ public class SystemController {
     }
 
 
-    public void addBookCopy(String isbn, int copyNumber) {
+    public void addBookCopy(String isbn, int copyNumber, AddBookCopyUI addBookCopyUI) {
 
         Book book = dataAccess.searchBook(isbn);
         if (book != null) {
@@ -90,12 +90,11 @@ public class SystemController {
             for (int i = 0; i < copyNumber; i++)
                 book.addCopy();
             dataAccess.saveNewBookCopy(book);
-            JOptionPane.showMessageDialog(null, "Book copy added");
+            addBookCopyUI.showSuccess("Book copy added successfully");
 
 
         } else {
-            JOptionPane.showMessageDialog(null, "Book not found");
-
+            addBookCopyUI.showError("Book Copy not found");
         }
 
     }
@@ -130,7 +129,6 @@ public class SystemController {
             JOptionPane.showMessageDialog(null, "Please enter an Author for the book");
         } else {
             dataAccess.saveNewBook(book);
-            JOptionPane.showMessageDialog(null, "Book Added Successfully");
         }
     }
 

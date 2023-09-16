@@ -1,5 +1,7 @@
 package librarysystem;
 
+import Utils.TextFieldUsername;
+import Utils.UIUtils;
 import business.SystemController;
 
 import javax.swing.*;
@@ -10,7 +12,7 @@ import java.awt.event.ActionListener;
 public class ReturnBookUI extends JFrame {
     private JButton getStatusButton, returnButton;
     private JLabel memberID, bookCopyNumber, bookStatus, bookISBN;
-    private JTextField memberIDInput, bookCopyNumberInput, bookStatusOutput, bookISBNInput;
+    private TextFieldUsername memberIDInput, bookCopyNumberInput, bookStatusOutput, bookISBNInput;
     private JPanel returnInput, mainPanel;
 
     public ReturnBookUI() throws HeadlessException {
@@ -20,17 +22,42 @@ public class ReturnBookUI extends JFrame {
 
     private void initComponents() {
         memberID = new JLabel("Input Member ID");
-        memberIDInput = new JTextField(10);
+        memberID.setForeground(Color.white);
+        memberID.setFont(UIUtils.FONT_GENERAL_UI);
+        memberIDInput = new TextFieldUsername();
+        memberIDInput.setColumns(10);
         bookCopyNumber = new JLabel("Input Book Copy Number");
-        bookCopyNumberInput = new JTextField(13);
+        bookCopyNumber.setFont(UIUtils.FONT_GENERAL_UI);
+        bookCopyNumber.setForeground(Color.white);
+        bookCopyNumberInput = new TextFieldUsername();
+        bookCopyNumberInput.setColumns(13);
+
         getStatusButton = new JButton("Show");
+        getStatusButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        getStatusButton.setBackground(new Color(0, 128, 0));
+        getStatusButton.setOpaque(true);
+        getStatusButton.setBorderPainted(false);
+        getStatusButton.setForeground(Color.WHITE);
+
         returnButton = new JButton("Return");
+        returnButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        returnButton.setBackground(new Color(0, 128, 0));
+        returnButton.setOpaque(true);
+        returnButton.setBorderPainted(false);
+        returnButton.setForeground(Color.WHITE);
+
         returnInput = new JPanel();
         mainPanel = new JPanel();
         bookStatus = new JLabel("Book Fee Due");
-        bookStatusOutput = new JTextField(10);
+        bookStatus.setFont(UIUtils.FONT_GENERAL_UI);
+        bookStatus.setForeground(Color.white);
+        bookStatusOutput = new TextFieldUsername();
+        bookStatusOutput.setColumns(10);
         bookISBN = new JLabel("Input Book ISBN");
-        bookISBNInput = new JTextField(13);
+        bookISBN.setFont(UIUtils.FONT_GENERAL_UI);
+        bookISBN.setForeground(Color.white);
+        bookISBNInput = new TextFieldUsername();
+        bookISBNInput.setColumns(13);
         bookStatusOutput.setEditable(false);
 
         returnInput.setLayout(new GridLayout(6, 2, 4, 4));
@@ -44,8 +71,11 @@ public class ReturnBookUI extends JFrame {
         returnInput.add(bookStatusOutput);
         returnInput.add(getStatusButton);
         returnInput.add(returnButton);
+        returnInput.setBackground(UIUtils.COLOR_BACKGROUND);
         mainPanel.add(returnInput);
         add(mainPanel);
+        mainPanel.setBackground(UIUtils.COLOR_BACKGROUND);
+        setBackground(UIUtils.COLOR_BACKGROUND);
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
         GuiProperties.centerFrameOnDesktop(this);
         returnButton.setEnabled(false);
@@ -81,6 +111,7 @@ public class ReturnBookUI extends JFrame {
         });
 
     }
+
 
     public void displayBookUnavailable() {
         JOptionPane.showMessageDialog(this, "Book not available");
