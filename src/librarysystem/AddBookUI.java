@@ -1,5 +1,8 @@
 package librarysystem;
 
+import Utils.CustomWideComboBox;
+import Utils.TextFieldUsername;
+import Utils.UIUtils;
 import business.Author;
 import business.SystemController;
 
@@ -15,10 +18,10 @@ public class AddBookUI extends JFrame {
     private JPanel mainPanel;
     private JLabel successLabel;
     private JLabel bookTitleLabel;
-    private JTextField bookTitleField;
+    private TextFieldUsername bookTitleField;
     private JLabel isbnLabel;
-    private JTextField isbnField;
-    private JComboBox<Integer> checkoutLengthSelector;
+    private TextFieldUsername isbnField;
+    private CustomWideComboBox checkoutLengthSelector;
     private JButton addAuthorButton;
     private JLabel checkoutLengthLabel;
 
@@ -29,7 +32,8 @@ public class AddBookUI extends JFrame {
 
     private void initComponents() {
         titleLabel = new JLabel("Add Book");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(Color.white);
+        titleLabel.setFont(UIUtils.FONT_GENERAL_UI);
 
         addButton = new JButton("Add Book");
         addButton.setBackground(new Color(0, 128, 0));
@@ -45,16 +49,25 @@ public class AddBookUI extends JFrame {
         successLabel.setVisible(false);
 
         bookTitleLabel = new JLabel("Book Title:");
-        bookTitleField = new JTextField(20);
+        bookTitleLabel.setForeground(Color.white);
+        bookTitleLabel.setFont(UIUtils.FONT_GENERAL_UI);
+        bookTitleField = new TextFieldUsername();
+        bookTitleField.setColumns(20);
 
         isbnLabel = new JLabel("ISBN:");
-        isbnField = new JTextField(20);
+        isbnLabel.setForeground(Color.white);;
+        isbnLabel.setFont(UIUtils.FONT_GENERAL_UI);
+        isbnField = new TextFieldUsername();
+        isbnField.setColumns(20);
 
-        checkoutLengthLabel = new JLabel("Select Max Checkout Length:");
+        checkoutLengthLabel = new JLabel("Max Checkout Length:");
+        checkoutLengthLabel.setForeground(Color.white);
+        checkoutLengthLabel.setFont(UIUtils.FONT_GENERAL_UI);
         DefaultComboBoxModel<Integer> model = new DefaultComboBoxModel<>();
         model.addElement(7);
         model.addElement(21);
-        checkoutLengthSelector = new JComboBox<>(model);
+        String items [] = {"7","21"};
+        checkoutLengthSelector = new CustomWideComboBox(items);
 
         addAuthorButton = new JButton("Add Authors");
         addAuthorButton.setBackground(new Color(0, 128, 128));
@@ -104,6 +117,7 @@ public class AddBookUI extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
+        mainPanel.setBackground(UIUtils.COLOR_BACKGROUND);
         GuiProperties.centerFrameOnDesktop(this);
     }
 
