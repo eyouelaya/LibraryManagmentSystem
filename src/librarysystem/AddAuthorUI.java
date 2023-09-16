@@ -37,7 +37,12 @@ public class AddAuthorUI extends JFrame {
         title.setForeground(Color.white);
 
         addAuthorBtn = new JButton("Add Author");
-        addAuthorBtn.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
+        addAuthorBtn.setFont(new Font("Arial", Font.PLAIN, 16));
+        addAuthorBtn.setBackground(new Color(0, 128, 0));
+        addAuthorBtn.setOpaque(true);
+        addAuthorBtn.setBorderPainted(false);
+        addAuthorBtn.setForeground(Color.WHITE);
+
         firstName = new JLabel("First Name");
         firstName.setFont(UIUtils.FONT_GENERAL_UI);
         firstName.setForeground(Color.white);

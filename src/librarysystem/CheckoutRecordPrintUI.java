@@ -52,8 +52,12 @@ public class CheckoutRecordPrintUI extends JFrame {
             panel1.add(memberIdText);
 
             //---- searchRecords ----
-            searchRecords.setText("Search");
-            searchRecords.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
+            searchRecords.setText("\uD83D\uDD0D Search");
+            searchRecords.setFont(new Font("Arial", Font.PLAIN, 16));
+            searchRecords.setBackground(new Color(0, 128, 0));
+            searchRecords.setOpaque(true);
+            searchRecords.setBorderPainted(false);
+            searchRecords.setForeground(Color.WHITE);
             panel1.add(searchRecords);
         }
         contentPane.add(panel1, BorderLayout.NORTH);

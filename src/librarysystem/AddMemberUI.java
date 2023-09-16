@@ -33,7 +33,11 @@ public class AddMemberUI extends JFrame {
         title.setForeground(Color.white);
 
         addNewMember = new JButton("Add Member");
-        addNewMember.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
+        addNewMember.setFont(new Font("Arial", Font.PLAIN, 16));
+        addNewMember.setBackground(new Color(0, 128, 0));
+        addNewMember.setOpaque(true);
+        addNewMember.setBorderPainted(false);
+        addNewMember.setForeground(Color.WHITE);
         memberIdLabel = new JLabel("Member ID");
         memberIdLabel.setFont(UIUtils.FONT_GENERAL_UI);
         memberIdLabel.setForeground(Color.white);
