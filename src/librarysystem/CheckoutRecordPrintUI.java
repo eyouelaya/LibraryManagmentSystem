@@ -1,5 +1,6 @@
 package librarysystem;
 
+import Toaster.Toaster;
 import business.CheckOutRecordEntry;
 import business.SystemController;
 
@@ -9,12 +10,14 @@ import java.util.List;
 
 
 public class CheckoutRecordPrintUI extends JFrame {
+    private Toaster toaster;
     public CheckoutRecordPrintUI() {
         initComponents();
     }
 
     private void initComponents() {
         panel1 = new JPanel();
+        toaster = new Toaster(panel1);
         label1 = new JLabel();
         memberIdText = new JTextField();
         searchRecords = new JButton();
@@ -60,7 +63,7 @@ public class CheckoutRecordPrintUI extends JFrame {
             String memberId = memberIdText.getText();
             if (!memberId.isEmpty()) {
                 SystemController.getInstance().searchCheckOutRecords(memberId, CheckoutRecordPrintUI.this);
-            } else JOptionPane.showMessageDialog(CheckoutRecordPrintUI.this, "Please fill out all fields.");
+            } else toaster.error("All fields are required");
         });
     }
 
@@ -72,11 +75,11 @@ public class CheckoutRecordPrintUI extends JFrame {
     private JTable recordEntryTable;
 
     public void displayNoRecordsFound() {
-        JOptionPane.showMessageDialog(this, "No records found");
+        toaster.error("No records found");
     }
 
     public void displayUserNotFound() {
-        JOptionPane.showMessageDialog(this, "No user found");
+        toaster.error("No User found");
     }
 
     public void showRecords(List<CheckOutRecordEntry> recordEntries) {

@@ -1,5 +1,6 @@
 package librarysystem;
 
+import Toaster.Toaster;
 import business.SystemController;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddBookCopyUI extends JFrame {
+    private Toaster toaster;
     private JLabel titleLabel;
     private JPanel mainPanel;
     private JPanel inputPanel;
@@ -36,6 +38,7 @@ public class AddBookCopyUI extends JFrame {
 
         // Main Panel
         mainPanel = new JPanel(new BorderLayout());
+        toaster = new Toaster(mainPanel);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // Input Panel
@@ -89,7 +92,7 @@ public class AddBookCopyUI extends JFrame {
             try {
                 int copyNumber = Integer.parseInt(copyNumberText);
                 SystemController.getInstance().addBookCopy(isbn, copyNumber);
-                JOptionPane.showMessageDialog(this, "Book Copy Added Successfully.");
+                toaster.success("Book Copy Added Successfully.");
                 clearInputs();
             } catch (NumberFormatException e) {
                 showError("Copy Number must be a numeric value.");
@@ -105,7 +108,7 @@ public class AddBookCopyUI extends JFrame {
     }
 
     private void showError(String message) {
-        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        toaster.error("All fields required");
     }
 
 
