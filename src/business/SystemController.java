@@ -174,8 +174,8 @@ public class SystemController {
                     && checkOutRecordEntry.getDateReturned() == null
                     && checkOutRecordEntry.getBookCopy().getCopyNum() == bookCopy) {
                 found = true;
-                LocalDate dueDate = checkOutRecordEntry.getDueDate();
-//                LocalDate dueDate = LocalDate.of(2020,1,11);
+              LocalDate dueDate = checkOutRecordEntry.getDueDate();
+            // LocalDate dueDate = LocalDate.of(2020,1,11);
                 System.out.println(dueDate+ " "+dueDate.isBefore(todaysDate));
                 if (dueDate.isBefore(todaysDate)) {
                     Period period = Period.between(dueDate,todaysDate);

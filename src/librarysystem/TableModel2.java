@@ -5,6 +5,7 @@ import business.BookCopy;
 import business.CheckOutRecordEntry;
 
 import javax.swing.table.AbstractTableModel;
+import java.time.LocalDate;
 import java.util.List;
 
 public class TableModel2 extends AbstractTableModel {
@@ -44,7 +45,9 @@ if (columnIndex == 0) {
         } else if (columnIndex == 2) {
         return bookCopy.getCopyNum();
         } else  {
-        return checkOutRecordEntry.getDueDate();
+//    LocalDate dueDate = LocalDate.of(2020,1,11);
+//    return dueDate;
+    return checkOutRecordEntry.getDueDate();
         }
 
     }
