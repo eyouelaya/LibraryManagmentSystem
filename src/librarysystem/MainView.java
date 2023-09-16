@@ -35,19 +35,19 @@ public class MainView extends JFrame {
         EmptyBorder paddingBorder = new EmptyBorder(10, 10, 10, 10);
 
         JPanel mainPanel = new JPanel(new GridLayout(6, 1));
-        addBook = uiUtils.createCustomLabel("Add Book", e -> { new AddBookUI().setVisible(true);});
+        addBook = uiUtils.createCustomLabel("\uD83D\uDCDA  Add Book", e -> { new AddBookUI().setVisible(true);});
         addBook.setBorder(paddingBorder);
-        addBookCopy = uiUtils.createCustomLabel("Add Book Copy", e -> {new AddBookCopyUI().setVisible(true);});
+        addBookCopy = uiUtils.createCustomLabel("\uD83D\uDCD6 Add Book Copy", e -> {new AddBookCopyUI().setVisible(true);});
         addBookCopy.setBorder(paddingBorder);
-        addMember = uiUtils.createCustomLabel("Add Member", e -> { new AddMemberUI().setVisible(true);});
+        addMember = uiUtils.createCustomLabel("\uD83D\uDC64 Add Member", e -> { new AddMemberUI().setVisible(true);});
         addMember.setBorder(paddingBorder);
-        checkOutBook = uiUtils.createCustomLabel("Book Checkout", e -> { new CheckOutUIForm().setVisible(true);});
+        checkOutBook = uiUtils.createCustomLabel("\uD83D\uDCD7 Book Checkout", e -> { new CheckOutUIForm().setVisible(true);});
         checkOutBook.setBorder(paddingBorder);
-        printCheckoutRecord = uiUtils.createCustomLabel("Print Checkout Record", e -> {  new CheckoutRecordPrintUI().setVisible(true);});
+        printCheckoutRecord = uiUtils.createCustomLabel("\uD83D\uDDA8 Print Checkout Record", e -> {  new CheckoutRecordPrintUI().setVisible(true);});
         printCheckoutRecord.setBorder(paddingBorder);
-        returnBook = uiUtils.createCustomLabel("Return Book", e -> {new ReturnBookUI().setVisible(true);});
+        returnBook = uiUtils.createCustomLabel("\uD83D\uDCD3 Return Book", e -> {new ReturnBookUI().setVisible(true);});
         returnBook.setBorder(paddingBorder);
-        getOverDueBooks = uiUtils.createCustomLabel("Get Overdue Book", e -> { new GetOverDueUI().setVisible(true);});
+        getOverDueBooks = uiUtils.createCustomLabel("\uD83D\uDCD3 Get Overdue Book", e -> { new GetOverDueUI().setVisible(true);});
         getOverDueBooks.setBorder(paddingBorder);
 
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
