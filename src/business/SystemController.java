@@ -159,7 +159,7 @@ public class SystemController {
         if (role == null)
             loginWindow.displayLoginError();
         else {
-            loginWindow.login(role);
+           loginWindow.login(role);
         }
     }
 
