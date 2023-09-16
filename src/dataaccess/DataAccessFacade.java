@@ -166,10 +166,8 @@ public class DataAccessFacade implements DataAccess {
 		//   userId -> User
 		return (HashMap<String, User>)readFromStorage(StorageType.USERS);
 	}
-	
 
-	
-		
+
 	static void loadBookMap(List<Book> bookList) {
 		HashMap<String, Book> books = new HashMap<String, Book>();
 		for (Book book : bookList) {

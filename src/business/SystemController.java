@@ -1,8 +1,7 @@
 package business;
 
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import dataaccess.Auth;
 import dataaccess.DataAccess;
@@ -252,6 +251,25 @@ public class SystemController {
             }
 
         }
+    }
+
+    public void searchCheckOutByISBN(String ISBN, GetOverDueUI getOverDueUI) {
+        List<String> memberId = new ArrayList<>();
+        HashMap<String, LibraryMember> allMembers = dataAccess.readMemberMap();
+        List<CheckOutRecordEntry> newRecord = new ArrayList<>();
+        for (Map.Entry x : allMembers.entrySet()) {
+            List<CheckOutRecordEntry> recordEntries = dataAccess.getCheckOutRecord((String) x.getKey());
+            for (CheckOutRecordEntry record : recordEntries) {
+                if (record.getBookCopy().getBook().getIsbn().equals(ISBN)) {
+                    if(record.getDueDate().isBefore(LocalDate.now()))
+                    newRecord.add(record);
+                   // memberId.add((String) x.getKey());
+                } else {
+                }
+            }
+            getOverDueUI.showRecords(newRecord);
+        }
+
     }
 }
 

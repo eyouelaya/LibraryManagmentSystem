@@ -16,7 +16,7 @@ public class GetOverDueUI extends JFrame {
     private void initComponents() {
         panel1 = new JPanel();
         label1 = new JLabel();
-        memberIdText = new JTextField();
+        ISBNText = new JTextField();
         searchRecords = new JButton();
         scrollPane1 = new JScrollPane();
         recordEntryTable = new JTable();
@@ -30,12 +30,12 @@ public class GetOverDueUI extends JFrame {
             panel1.setLayout(new FlowLayout());
 
             //---- label1 ----
-            label1.setText("Enter member id");
+            label1.setText("Enter book ISBN");
             panel1.add(label1);
 
             //---- memberIdText ----
-            memberIdText.setColumns(10);
-            panel1.add(memberIdText);
+            ISBNText.setColumns(10);
+            panel1.add(ISBNText);
 
             //---- searchRecords ----
             searchRecords.setText("\uD83D\uDD0D Search");
@@ -62,16 +62,16 @@ public class GetOverDueUI extends JFrame {
 
     private void handle() {
         searchRecords.addActionListener(e -> {
-            String memberId = memberIdText.getText();
-            if (!memberId.isEmpty()) {
-//                SystemController.getInstance().searchCheckOutRecords(memberId, GetOverDueUI.this);
+            String ISBN= ISBNText.getText();
+            if (!ISBN.isEmpty()) {
+                SystemController.getInstance().searchCheckOutByISBN(ISBN, GetOverDueUI.this);
             } else JOptionPane.showMessageDialog(GetOverDueUI.this, "Please fill out all fields.");
         });
     }
 
     private JPanel panel1;
     private JLabel label1;
-    private JTextField memberIdText;
+    private JTextField ISBNText;
     private JButton searchRecords;
     private JScrollPane scrollPane1;
     private JTable recordEntryTable;
@@ -80,11 +80,11 @@ public class GetOverDueUI extends JFrame {
         JOptionPane.showMessageDialog(this, "No records found");
     }
 
-    public void displayUserNotFound() {
-        JOptionPane.showMessageDialog(this, "No user found");
+    public void displayBookNotFound() {
+        JOptionPane.showMessageDialog(this, "No Book found");
     }
 
     public void showRecords(List<CheckOutRecordEntry> recordEntries) {
-        recordEntryTable.setModel(new TableModel(recordEntries));
+        recordEntryTable.setModel(new TableModel2(recordEntries));
     }
 }
