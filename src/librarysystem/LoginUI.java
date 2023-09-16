@@ -52,7 +52,7 @@ public class LoginUI extends JFrame {
     private JPanel getMainJPanel() {
         this.setUndecorated(true);
 
-        Dimension size = new Dimension(800, 400);
+        Dimension size = new Dimension(830, 400);
 
         JPanel panel1 = new JPanel();
         panel1.setSize(size);
