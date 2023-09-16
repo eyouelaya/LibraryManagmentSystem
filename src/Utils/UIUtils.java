@@ -1,6 +1,11 @@
 package Utils;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
 public class UIUtils {
@@ -29,4 +34,59 @@ public class UIUtils {
         }});
         return g2;
     }
+
+    public JLabel createCustomLabel(String labelText, ActionListener actionListener) {
+        final Color[] buttonColors = {UIUtils.COLOR_INTERACTIVE, Color.WHITE};
+
+        JLabel customLabel = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = UIUtils.get2dGraphics(g);
+                super.paintComponent(g2);
+
+                Insets insets = getInsets();
+                int w = getWidth() - insets.left - insets.right;
+                int h = getHeight() - insets.top - insets.bottom;
+                g2.setColor(buttonColors[0]);
+                g2.fillRoundRect(insets.left, insets.top, w, h, UIUtils.ROUNDNESS, UIUtils.ROUNDNESS);
+
+                FontMetrics metrics = g2.getFontMetrics(UIUtils.FONT_GENERAL_UI);
+                int x2 = (getWidth() - metrics.stringWidth(labelText)) / 2;
+                int y2 = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
+                g2.setFont(UIUtils.FONT_GENERAL_UI);
+                g2.setColor(buttonColors[1]);
+                g2.drawString(labelText, x2, y2);
+            }
+        };
+
+        customLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // Perform the action associated with the label
+                if (actionListener != null) {
+                    actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                buttonColors[0] = UIUtils.COLOR_INTERACTIVE_DARKER;
+                buttonColors[1] = UIUtils.OFFWHITE;
+                customLabel.repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                buttonColors[0] = UIUtils.COLOR_INTERACTIVE;
+                buttonColors[1] = Color.WHITE;
+                customLabel.repaint();
+            }
+        });
+
+        customLabel.setBackground(UIUtils.COLOR_BACKGROUND);
+        customLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        return customLabel;
+    }
+
 }
