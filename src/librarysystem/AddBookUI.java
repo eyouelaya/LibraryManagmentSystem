@@ -10,149 +10,133 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class AddBookUI extends JFrame {
-    private JLabel label1;
-    private JButton addBook;
-    private JPanel panel1;
-    private JPanel panel5;
-    private JLabel successText;
-    private JPanel panel3;
-    private JLabel label3;
-    private JTextField bookTitle;
-    private JPanel panel2;
-    private JLabel label2;
-    private JTextField isbnTextField;
-    private JPanel panel4;
+    private JLabel titleLabel;
+    private JButton addButton;
+    private JPanel mainPanel;
+    private JLabel successLabel;
+    private JLabel bookTitleLabel;
+    private JTextField bookTitleField;
+    private JLabel isbnLabel;
+    private JTextField isbnField;
     private JComboBox<Integer> checkoutLengthSelector;
-    private JButton addAuthorBtn;
-    private JLabel checkoutLabel;
+    private JButton addAuthorButton;
+    private JLabel checkoutLengthLabel;
+
     public AddBookUI() {
         initComponents();
-    }
-
-    private void initComponents() {
-
-        label1 = new JLabel();
-        addBook = new JButton();
-        panel1 = new JPanel();
-        panel5 = new JPanel();
-        successText = new JLabel();
-        panel3 = new JPanel();
-        label3 = new JLabel();
-        bookTitle = new JTextField();
-        panel2 = new JPanel();
-        label2 = new JLabel();
-        isbnTextField = new JTextField();
-        panel4 = new JPanel();
-        checkoutLabel = new JLabel("Select Max Checkout Length");
-        addAuthorBtn = new JButton();
-
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        model.addElement("7");
-        model.addElement("21");
-        checkoutLengthSelector = new JComboBox<>(model);
-
-        //======== this ========
-        var contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout(5, 5));
-
-        //---- label1 ----
-        label1.setText("Add Book");
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        contentPane.add(label1, BorderLayout.NORTH);
-
-        //---- addBookAuthor ----
-        addBook.setText("Add book");
-
-        contentPane.add(addBook, BorderLayout.SOUTH); 
-
-        //======== panel1 ========
-        {
-
-            panel1.setLayout(new BorderLayout(4, 4));
-
-            //======== panel5 ========
-            {
-                panel5.setLayout(new FlowLayout());
-
-                //---- successText ----
-                successText.setText("Book Added successfully");
-                successText.setVisible(false);
-                panel5.add(successText);
-            }
-            panel1.add(panel5, BorderLayout.SOUTH);
-
-            //======== panel3 ========
-            {
-                panel3.setLayout(new FlowLayout());
-
-                //---- label3 ----
-                label3.setText("Book title: ");
-                panel3.add(label3);
-
-                //---- bookTitle ----
-                bookTitle.setColumns(10);
-                panel3.add(bookTitle);
-                panel3.add(checkoutLabel);
-                panel3.add(checkoutLengthSelector);
-            }
-            panel1.add(panel3, BorderLayout.NORTH);
-
-            //======== panel2 ========
-            {
-                panel2.setLayout(new FlowLayout());
-
-                //---- label2 ----
-                label2.setText("ISBN: ");
-                panel2.add(label2);
-
-                //---- isbnTextField ----
-                isbnTextField.setColumns(10);
-                panel2.add(isbnTextField);
-
-                //======== panel4 ========
-                {
-                    panel4.setLayout(new BorderLayout(5, 5));
-
-                    //---- addAuthorBtn ----
-                    addAuthorBtn.setText("Add Authors");
-                    panel4.add(addAuthorBtn, BorderLayout.CENTER);
-                }
-                panel2.add(panel4);
-            }
-            panel1.add(panel2, BorderLayout.CENTER);
-        }
-        contentPane.add(panel1, BorderLayout.CENTER);
-        pack();
-        setLocationRelativeTo(getOwner());
-        setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
-        GuiProperties.centerFrameOnDesktop(this);
         handle();
     }
 
-    private void handle() {
-        addAuthorBtn.addActionListener(e -> {
-            new AddAuthorUI().setVisible(true);
-        });
+    private void initComponents() {
+        titleLabel = new JLabel("Add Book");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
 
-        addBook.addActionListener(new ActionListener() {
+        addButton = new JButton("Add Book");
+        addButton.setBackground(new Color(0, 128, 0));
+        addButton.setForeground(Color.WHITE);
+        addButton.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        successLabel = new JLabel("Book Added Successfully!");
+        successLabel.setForeground(new Color(0, 128, 0));
+        successLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        successLabel.setVisible(false);
+
+        bookTitleLabel = new JLabel("Book Title:");
+        bookTitleField = new JTextField(20);
+
+        isbnLabel = new JLabel("ISBN:");
+        isbnField = new JTextField(20);
+
+        checkoutLengthLabel = new JLabel("Select Max Checkout Length:");
+        DefaultComboBoxModel<Integer> model = new DefaultComboBoxModel<>();
+        model.addElement(7);
+        model.addElement(21);
+        checkoutLengthSelector = new JComboBox<>(model);
+
+        addAuthorButton = new JButton("Add Authors");
+        addAuthorButton.setBackground(new Color(0, 128, 128));
+        addAuthorButton.setForeground(Color.WHITE);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        mainPanel.add(titleLabel, gbc);
+
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        mainPanel.add(bookTitleLabel, gbc);
+
+        gbc.gridx = 1;
+        mainPanel.add(bookTitleField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        mainPanel.add(isbnLabel, gbc);
+
+        gbc.gridx = 1;
+        mainPanel.add(isbnField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        mainPanel.add(checkoutLengthLabel, gbc);
+
+        gbc.gridx = 1;
+        mainPanel.add(checkoutLengthSelector, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        mainPanel.add(addAuthorButton, gbc);
+
+        gbc.gridy = 5;
+        mainPanel.add(successLabel, gbc);
+
+        gbc.gridy = 6;
+        mainPanel.add(addButton, gbc);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
+        GuiProperties.centerFrameOnDesktop(this);
+    }
+
+    public void handle(){
+        addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String title = bookTitle.getText();
-                String isbnText = isbnTextField.getText();
+                String title = bookTitleField.getText();
+                String isbnText = isbnField.getText();
                 List<Author> authorsList = SystemController.getInstance().getAuthorsList();
-                String checkOutLength = (String) checkoutLengthSelector.getSelectedItem();
-
+                int checkOutLength = (int) checkoutLengthSelector.getSelectedItem();
 
                 if ((!title.isEmpty() && !isbnText.isEmpty() && !authorsList.isEmpty())) {
-                    SystemController.getInstance().addBook(title, isbnText, Integer.parseInt(checkOutLength),authorsList);
-
+                    SystemController.getInstance().addBook(title, isbnText, checkOutLength, authorsList);
+                    successLabel.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(AddBookUI.this, "Please provide all information.");
-                    successText.setVisible(false);
+                    successLabel.setVisible(false);
                 }
             }
         });
-    }
 
+        addAuthorButton.addActionListener(e -> {
+            new AddAuthorUI().setVisible(true);
+        });
+
+        setLayout(new BorderLayout());
+        add(mainPanel, BorderLayout.CENTER);
+
+        setTitle("Library System");
+
+        setVisible(true);
+
+    }
 
 }

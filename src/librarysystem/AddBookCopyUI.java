@@ -4,110 +4,109 @@ import business.SystemController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddBookCopyUI extends JFrame {
-    private JLabel label1;
-    private JPanel panel1;
-    private JPanel panel4;
-    private JButton addCopyBtn;
-    private JPanel panel2;
-    private JLabel label2;
+    private JLabel titleLabel;
+    private JPanel mainPanel;
+    private JPanel inputPanel;
+    private JLabel copyNumberLabel;
     private JTextField copyNumberTextField;
-    private JPanel panel3;
-    private JLabel label3;
+    private JLabel isbnLabel;
     private JTextField isbnTextField;
+    private JButton addButton;
+
     public AddBookCopyUI() {
         initComponents();
-    }
-
-    private void initComponents() {
-        label1 = new JLabel();
-        panel1 = new JPanel();
-        panel4 = new JPanel();
-        addCopyBtn = new JButton();
-        panel2 = new JPanel();
-        label2 = new JLabel();
-        copyNumberTextField = new JTextField();
-        panel3 = new JPanel();
-        label3 = new JLabel();
-        isbnTextField = new JTextField();
-
-        //======== this ========
-        var contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout(5, 5));
-
-        //---- label1 ----
-        label1.setText("Add book copy");
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        contentPane.add(label1, BorderLayout.NORTH);
-
-        //======== panel1 ========
-        {
-            panel1.setLayout(new BorderLayout(5, 5));
-
-            //======== panel4 ========
-            {
-                panel4.setLayout(new FlowLayout());
-
-                //---- addCopyBtn ----
-                addCopyBtn.setText("Add copy");
-                panel4.add(addCopyBtn);
-            }
-            panel1.add(panel4, BorderLayout.SOUTH);
-
-            //======== panel2 ========
-            {
-                panel2.setLayout(new FlowLayout());
-
-                //---- label2 ----
-                label2.setText("Copy number: ");
-                panel2.add(label2);
-
-                //---- copyNumberTextField ----
-                copyNumberTextField.setColumns(5);
-                panel2.add(copyNumberTextField);
-            }
-            panel1.add(panel2, BorderLayout.CENTER);
-
-            //======== panel3 ========
-            {
-                panel3.setLayout(new FlowLayout());
-
-                //---- label3 ----
-                label3.setText("ISBN: ");
-                panel3.add(label3);
-
-                //---- isbnTextField ----
-                isbnTextField.setColumns(10);
-                panel3.add(isbnTextField);
-            }
-            panel1.add(panel3, BorderLayout.NORTH);
-        }
-        contentPane.add(panel1, BorderLayout.CENTER);
-        pack();
-        setLocationRelativeTo(getOwner());
-        setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
-        GuiProperties.centerFrameOnDesktop(this);
         handle();
     }
 
-    private void handle() {
-        addCopyBtn.addActionListener(e -> {
-            String isbn = isbnTextField.getText();
-            try {
-                int copyNumber = Integer.parseInt(copyNumberTextField.getText());
+    private void initComponents() {
+        setTitle("Add Book Copy");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(400, 200);
+        setLocationRelativeTo(null);
+        setResizable(false);
 
-                if (!(isbn.isEmpty())) {
-                    SystemController.getInstance().addBookCopy(isbn, copyNumber);
+        // Title Label
+        titleLabel = new JLabel("Add Book Copy");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-                } else JOptionPane.showMessageDialog(AddBookCopyUI.this, "Enter all fields.");
-            } catch (NumberFormatException err) {
-                JOptionPane.showMessageDialog(AddBookCopyUI.this, "Copy number must be a numeric value");
+        // Main Panel
+        mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Input Panel
+        inputPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+
+        // Copy Number Input
+        copyNumberLabel = new JLabel("Copy Number:");
+        copyNumberTextField = new JTextField(10);
+
+        // ISBN Input
+        isbnLabel = new JLabel("ISBN:");
+        isbnTextField = new JTextField(10);
+
+        inputPanel.add(copyNumberLabel);
+        inputPanel.add(copyNumberTextField);
+        inputPanel.add(isbnLabel);
+        inputPanel.add(isbnTextField);
+
+        // Add Button
+        addButton = new JButton("Add Copy");
+        addButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        addButton.setBackground(new Color(0, 128, 0));
+        addButton.setForeground(Color.WHITE);
+
+        // Add components to main panel
+        mainPanel.add(titleLabel, BorderLayout.NORTH);
+        mainPanel.add(inputPanel, BorderLayout.CENTER);
+        mainPanel.add(addButton, BorderLayout.SOUTH);
+
+        // Add main panel to the frame
+        add(mainPanel);
+        setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
+        GuiProperties.centerFrameOnDesktop(this);
+    }
+    private void handle(){
+
+        // Handle button click event
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addCopyButtonClicked();
             }
         });
     }
 
+    private void addCopyButtonClicked() {
+        String isbn = isbnTextField.getText();
+        String copyNumberText = copyNumberTextField.getText();
 
+        if (!isbn.isEmpty() && !copyNumberText.isEmpty()) {
+            try {
+                int copyNumber = Integer.parseInt(copyNumberText);
+                SystemController.getInstance().addBookCopy(isbn, copyNumber);
+                JOptionPane.showMessageDialog(this, "Book Copy Added Successfully.");
+                clearInputs();
+            } catch (NumberFormatException e) {
+                showError("Copy Number must be a numeric value.");
+            }
+        } else {
+            showError("Please fill in all fields.");
+        }
+    }
+
+    private void clearInputs() {
+        isbnTextField.setText("");
+        copyNumberTextField.setText("");
+    }
+
+    private void showError(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
 
 }
