@@ -18,9 +18,7 @@ public class UIUtils {
     public static final Color COLOR_INTERACTIVE_DARKER = new Color(87, 171, 127);
     public static final Color OFFWHITE = new Color(229, 229, 229);
 
-    public static final String BUTTON_TEXT_LOGIN = "Login";
-    public static final String BUTTON_TEXT_FORGOT_PASS = "Forgot your password?";
-    public static final String BUTTON_TEXT_REGISTER = "Register";
+    public static final String BUTTON_TEXT_LOGIN = "\uD83D\uDD12 Login";
 
     public static final String PLACEHOLDER_TEXT_USERNAME = "User Id";
 
