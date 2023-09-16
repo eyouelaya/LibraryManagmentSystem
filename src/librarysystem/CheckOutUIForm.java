@@ -1,5 +1,6 @@
 package librarysystem;
 
+import Toaster.Toaster;
 import Utils.TextFieldUsername;
 import Utils.UIUtils;
 import business.SystemController;
@@ -9,12 +10,14 @@ import java.awt.*;
 
 
 public class CheckOutUIForm extends JFrame {
+    private Toaster toaster;
     private JPanel panel4;
     private JButton checkoutButton;
     private JLabel label1;
     private JPanel panel5;
     private JPanel panel3;
     private JLabel label3;
+    private JLabel label4;
     private TextFieldUsername memberIDTextField;
     private JPanel panel2;
     private JLabel label2;
@@ -28,10 +31,16 @@ public class CheckOutUIForm extends JFrame {
 
         panel4 = new JPanel();
         checkoutButton = new JButton();
+        checkoutButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        checkoutButton.setBackground(new Color(0, 128, 0));
+        checkoutButton.setOpaque(true);
+        checkoutButton.setBorderPainted(false);
+        checkoutButton.setForeground(Color.WHITE);
         label1 = new JLabel();
         panel5 = new JPanel();
         panel3 = new JPanel();
         label3 = new JLabel();
+        label4 = new JLabel();
         memberIDTextField = new TextFieldUsername();
         panel2 = new JPanel();
         label2 = new JLabel();
@@ -41,15 +50,10 @@ public class CheckOutUIForm extends JFrame {
         setLayout(new BorderLayout(8, 8));
 
         //======== panel4 ========
-        {
-            panel4.setLayout(new FlowLayout());
 
-            //---- checkoutButton ----
-            checkoutButton.setText("Checkout book");
-            panel4.add(checkoutButton);
-            panel4.setBackground(UIUtils.COLOR_BACKGROUND);
-        }
-        add(panel4, BorderLayout.PAGE_END);
+        //add(panel4, BorderLayout.SOUTH);
+        //
+        // panel5.add(panel4);
 
         //---- label1 ----
         JPanel titlePanel = new JPanel();
@@ -106,9 +110,26 @@ public class CheckOutUIForm extends JFrame {
                 panel2.setBackground(UIUtils.COLOR_BACKGROUND);
             }
             panel5.add(panel2);
+
+            {
+                panel4.setLayout(new FlowLayout());
+
+                label4.setText("                              ");
+                label4.setForeground(Color.white);
+                label4.setFont(UIUtils.FONT_GENERAL_UI);
+                panel4.add(label4);
+
+
+                //---- checkoutButton ----
+                checkoutButton.setText("Checkout book");
+                panel4.add(checkoutButton);
+                panel4.setBackground(UIUtils.COLOR_BACKGROUND);
+            }
+            panel5.add(panel4);
         }
         add(panel5, BorderLayout.CENTER);
         panel5.setBackground(UIUtils.COLOR_BACKGROUND);
+        toaster = new Toaster(panel5);
 
         setBackground(UIUtils.COLOR_BACKGROUND);
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
@@ -124,21 +145,21 @@ public class CheckOutUIForm extends JFrame {
 
             if (!(isbn.isEmpty() && memberId.isEmpty())) {
                 SystemController.getInstance().checkOutBook(memberId, isbn, CheckOutUIForm.this);
-            } else JOptionPane.showMessageDialog(CheckOutUIForm.this, "Please enter details.");
+            } toaster.error("All fields are required");
         });
     }
 
 
 
     public void displayBookUnavailable() {
-        JOptionPane.showMessageDialog(this, "Book not available");
+        toaster.error("Book not available");
     }
 
     public void displayMemberUnavailable() {
-        JOptionPane.showMessageDialog(this, "Member not available");
+        toaster.error("Member not available");
     }
 
     public void displayCheckoutSuccess() {
-        JOptionPane.showMessageDialog(this, "Book checked out");
+        toaster.success("Book checked out");
     }
 }

@@ -40,9 +40,12 @@ public class AddBookUI extends JFrame {
         titleLabel.setFont(UIUtils.FONT_GENERAL_UI);
 
         addButton = new JButton("Add Book");
-        addButton.setBackground(new Color(0, 128, 0));
-        addButton.setForeground(Color.WHITE);
         addButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        addButton.setBackground(new Color(0, 128, 0));
+        addButton.setOpaque(true);
+        addButton.setBorderPainted(false);
+        addButton.setForeground(Color.WHITE);
+
 
         mainPanel = new JPanel(new GridBagLayout());
         toaster = new Toaster(mainPanel);
@@ -75,7 +78,10 @@ public class AddBookUI extends JFrame {
         checkoutLengthSelector = new CustomWideComboBox(items);
 
         addAuthorButton = new JButton("Add Authors");
-        addAuthorButton.setBackground(new Color(0, 128, 128));
+        addAuthorButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        addAuthorButton.setBackground(new Color(0, 128, 0));
+        addAuthorButton.setOpaque(true);
+        addAuthorButton.setBorderPainted(false);
         addAuthorButton.setForeground(Color.WHITE);
 
         GridBagConstraints gbc = new GridBagConstraints();

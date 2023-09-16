@@ -20,10 +20,12 @@ public class AddBookCopyUI extends JFrame {
     private JLabel isbnLabel;
     private TextFieldUsername isbnTextField;
     private JButton addButton;
+    private JLabel submitButton;
+
+    private UIUtils uiUtils = new UIUtils();
 
     public AddBookCopyUI() {
         initComponents();
-        handle();
     }
 
     private void initComponents() {
@@ -61,10 +63,8 @@ public class AddBookCopyUI extends JFrame {
         isbnLabel.setForeground(Color.white);
         isbnTextField = new TextFieldUsername();
         isbnTextField.setColumns(10);
-        // Add Button
-        addButton = new JButton("Add Copy");
-        addButton.setBackground(new Color(0, 128, 0));
-        addButton.setForeground(Color.WHITE);
+
+        submitButton = uiUtils.createCustomLabel("Add Copy", e -> { addCopyButtonClicked();});
 
         JLabel x= new  JLabel("x");
         x.setForeground(UIUtils.COLOR_BACKGROUND);
@@ -74,7 +74,7 @@ public class AddBookCopyUI extends JFrame {
         inputPanel.add(isbnLabel);
         inputPanel.add(isbnTextField);
         inputPanel.add(x);
-        inputPanel.add(addButton);
+        inputPanel.add(submitButton);
         inputPanel.setBackground(UIUtils.COLOR_BACKGROUND);
 
 
@@ -89,16 +89,6 @@ public class AddBookCopyUI extends JFrame {
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
         GuiProperties.centerFrameOnDesktop(this);
     }
-    private void handle(){
-
-        // Handle button click event
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addCopyButtonClicked();
-            }
-        });
-    }
 
     private void addCopyButtonClicked() {
         String isbn = isbnTextField.getText();
@@ -107,8 +97,7 @@ public class AddBookCopyUI extends JFrame {
         if (!isbn.isEmpty() && !copyNumberText.isEmpty()) {
             try {
                 int copyNumber = Integer.parseInt(copyNumberText);
-                SystemController.getInstance().addBookCopy(isbn, copyNumber);
-                toaster.success("Book Copy Added Successfully.");
+                SystemController.getInstance().addBookCopy(isbn, copyNumber, AddBookCopyUI.this);
                 clearInputs();
             } catch (NumberFormatException e) {
                 showError("Copy Number must be a numeric value.");
@@ -123,8 +112,12 @@ public class AddBookCopyUI extends JFrame {
         copyNumberTextField.setText("");
     }
 
-    private void showError(String message) {
-        toaster.error("All fields required");
+    public void showError(String message) {
+        toaster.error(message);
+    }
+
+    public void showSuccess(String message) {
+        toaster.success(message);
     }
 
 

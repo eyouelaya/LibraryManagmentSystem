@@ -31,10 +31,21 @@ public class ReturnBookUI extends JFrame {
         bookCopyNumber.setForeground(Color.white);
         bookCopyNumberInput = new TextFieldUsername();
         bookCopyNumberInput.setColumns(13);
+
         getStatusButton = new JButton("Show");
-        getStatusButton.setBackground(UIUtils.COLOR_OUTLINE);
+        getStatusButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        getStatusButton.setBackground(new Color(0, 128, 0));
+        getStatusButton.setOpaque(true);
+        getStatusButton.setBorderPainted(false);
+        getStatusButton.setForeground(Color.WHITE);
+
         returnButton = new JButton("Return");
-        returnButton.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
+        returnButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        returnButton.setBackground(new Color(0, 128, 0));
+        returnButton.setOpaque(true);
+        returnButton.setBorderPainted(false);
+        returnButton.setForeground(Color.WHITE);
+
         returnInput = new JPanel();
         mainPanel = new JPanel();
         bookStatus = new JLabel("Book Fee Due");
