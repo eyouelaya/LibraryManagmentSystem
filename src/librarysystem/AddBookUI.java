@@ -133,7 +133,8 @@ public class AddBookUI extends JFrame {
                 String title = bookTitleField.getText();
                 String isbnText = isbnField.getText();
                 List<Author> authorsList = SystemController.getInstance().getAuthorsList();
-                int checkOutLength = (int) checkoutLengthSelector.getSelectedItem();
+                String checkOutLengthString =(String) checkoutLengthSelector.getSelectedItem();
+                int checkOutLength = Integer.parseInt(checkOutLengthString);
 
                 if ((!title.isEmpty() && !isbnText.isEmpty() && !authorsList.isEmpty())) {
                     SystemController.getInstance().addBook(title, isbnText, checkOutLength, authorsList);

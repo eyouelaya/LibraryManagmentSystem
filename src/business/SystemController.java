@@ -130,7 +130,6 @@ public class SystemController {
             JOptionPane.showMessageDialog(null, "Please enter an Author for the book");
         } else {
             dataAccess.saveNewBook(book);
-            JOptionPane.showMessageDialog(null, "Book Added Successfully");
         }
     }
 
