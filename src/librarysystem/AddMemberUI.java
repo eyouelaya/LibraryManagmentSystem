@@ -1,5 +1,6 @@
 package librarysystem;
 
+import Toaster.Toaster;
 import business.SystemController;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import java.awt.*;
 
 
 public class AddMemberUI extends JFrame {
+    private Toaster toaster;
     public AddMemberUI() {
         initComponents();
     }
@@ -40,6 +42,7 @@ public class AddMemberUI extends JFrame {
     private void initComponents() {
         label1 = new JLabel();
         panel1 = new JPanel();
+        toaster = new Toaster(panel1);
         panel4 = new JPanel();
         label4 = new JLabel();
         memberID = new JTextField();
@@ -238,7 +241,7 @@ public class AddMemberUI extends JFrame {
                         streetText,
                         cityText,
                         zipText);
-            } else JOptionPane.showMessageDialog(AddMemberUI.this, "Enter all credentials");
+            } else toaster.error("All fields are required");
         });
     }
 

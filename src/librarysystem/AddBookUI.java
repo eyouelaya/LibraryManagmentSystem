@@ -3,6 +3,7 @@ package librarysystem;
 import Utils.CustomWideComboBox;
 import Utils.TextFieldUsername;
 import Utils.UIUtils;
+import Toaster.Toaster;
 import business.Author;
 import business.SystemController;
 
@@ -13,6 +14,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class AddBookUI extends JFrame {
+
+    private Toaster toaster;
+
     private JLabel titleLabel;
     private JButton addButton;
     private JPanel mainPanel;
@@ -41,6 +45,7 @@ public class AddBookUI extends JFrame {
         addButton.setFont(new Font("Arial", Font.PLAIN, 16));
 
         mainPanel = new JPanel(new GridBagLayout());
+        toaster = new Toaster(mainPanel);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         successLabel = new JLabel("Book Added Successfully!");
@@ -134,7 +139,7 @@ public class AddBookUI extends JFrame {
                     SystemController.getInstance().addBook(title, isbnText, checkOutLength, authorsList);
                     successLabel.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(AddBookUI.this, "Please provide all information.");
+                    toaster.error("All fields are required");
                     successLabel.setVisible(false);
                 }
             }
