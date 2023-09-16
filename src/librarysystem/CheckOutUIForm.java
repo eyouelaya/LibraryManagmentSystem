@@ -145,7 +145,9 @@ public class CheckOutUIForm extends JFrame {
 
             if (!(isbn.isEmpty() && memberId.isEmpty())) {
                 SystemController.getInstance().checkOutBook(memberId, isbn, CheckOutUIForm.this);
-            } toaster.error("All fields are required");
+            }
+            else
+                toaster.error("All fields are required");
         });
     }
 
