@@ -139,6 +139,7 @@ public class CheckOutUIForm extends JFrame {
         inputPanel.add(memberIDTextField);
         inputPanel.add(label2);
         inputPanel.add(isbnTextField);
+        inputPanel.add(new JLabel(""));
         inputPanel.add(checkoutButton);
         inputPanel.setBackground(UIUtils.COLOR_BACKGROUND);
         JPanel mainpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
