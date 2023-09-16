@@ -1,5 +1,6 @@
 package librarysystem;
 
+import Utils.UIUtils;
 import dataaccess.Auth;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public class MainView extends JFrame {
         JPanel mainPanel = new JPanel(new GridLayout(6, 1));
         addBook = createStyledButton("Add Book", new Color(0, 128, 0));
         addBookCopy = createStyledButton("Add Book Copy", new Color(0, 128, 0));
-        addMember = createStyledButton("Add Member", new Color(0, 128, 128));
+        addMember = createStyledButton("Add Member", new Color(0, 128, 0));
         checkOutBook = createStyledButton("Checkout Book", new Color(0, 128, 128));
         printCheckoutRecord = createStyledButton("Print Checkout Record", new Color(0, 128, 128));
         returnBook = createStyledButton("Return Book", new Color(0, 128, 128));
@@ -44,6 +45,7 @@ public class MainView extends JFrame {
         mainPanel.add(printCheckoutRecord);
         mainPanel.add(returnBook);
         mainPanel.add(getOverDueBooks);
+        mainPanel.setBackground(UIUtils.COLOR_BACKGROUND);
 
         switch (role) {
             case LIBRARIAN:
