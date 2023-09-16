@@ -1,6 +1,8 @@
 package librarysystem;
 
 import Toaster.Toaster;
+import Utils.TextFieldUsername;
+import Utils.UIUtils;
 import business.CheckOutRecordEntry;
 import business.SystemController;
 
@@ -11,6 +13,12 @@ import java.util.List;
 
 public class CheckoutRecordPrintUI extends JFrame {
     private Toaster toaster;
+    private JPanel panel1;
+    private JLabel memberIDLabel;
+    private TextFieldUsername memberIdText;
+    private JButton searchRecords;
+    private JScrollPane scrollPane1;
+    private JTable recordEntryTable;
     public CheckoutRecordPrintUI() {
         initComponents();
     }
@@ -18,8 +26,8 @@ public class CheckoutRecordPrintUI extends JFrame {
     private void initComponents() {
         panel1 = new JPanel();
         toaster = new Toaster(panel1);
-        label1 = new JLabel();
-        memberIdText = new JTextField();
+        memberIDLabel = new JLabel();
+        memberIdText = new TextFieldUsername();
         searchRecords = new JButton();
         scrollPane1 = new JScrollPane();
         recordEntryTable = new JTable();
@@ -31,10 +39,13 @@ public class CheckoutRecordPrintUI extends JFrame {
         //======== panel1 ========
         {
             panel1.setLayout(new FlowLayout());
+            panel1.setBackground(UIUtils.COLOR_BACKGROUND);
 
             //---- label1 ----
-            label1.setText("Enter member id");
-            panel1.add(label1);
+            memberIDLabel.setText("Enter member id");
+            memberIDLabel.setFont(UIUtils.FONT_GENERAL_UI);
+            memberIDLabel.setForeground(Color.white);
+            panel1.add(memberIDLabel);
 
             //---- memberIdText ----
             memberIdText.setColumns(10);
@@ -42,6 +53,7 @@ public class CheckoutRecordPrintUI extends JFrame {
 
             //---- searchRecords ----
             searchRecords.setText("Search");
+            searchRecords.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
             panel1.add(searchRecords);
         }
         contentPane.add(panel1, BorderLayout.NORTH);
@@ -55,6 +67,7 @@ public class CheckoutRecordPrintUI extends JFrame {
         setLocationRelativeTo(getOwner());
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);
         GuiProperties.centerFrameOnDesktop(this);
+        contentPane.setBackground(UIUtils.COLOR_BACKGROUND);
         handle();
     }
 
@@ -67,12 +80,7 @@ public class CheckoutRecordPrintUI extends JFrame {
         });
     }
 
-    private JPanel panel1;
-    private JLabel label1;
-    private JTextField memberIdText;
-    private JButton searchRecords;
-    private JScrollPane scrollPane1;
-    private JTable recordEntryTable;
+
 
     public void displayNoRecordsFound() {
         toaster.error("No records found");
