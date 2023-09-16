@@ -20,17 +20,14 @@ public class GuiProperties {
         return control;
     }
 
-    public static int SCREEN_WIDTH = 640;
-    public static int SCREEN_HEIGHT = 480;
+    public static int SCREEN_WIDTH = 800;
+    public static int SCREEN_HEIGHT = 400;
 
     public static void centerFrameOnDesktop(Component f) {
         final int SHIFT_AMOUNT = 0;
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        int height = toolkit.getScreenSize().height;
-        int width = toolkit.getScreenSize().width;
-        int frameHeight = f.getSize().height;
-        int frameWidth = f.getSize().width;
-        f.setLocation(((width - frameWidth) / 2) - SHIFT_AMOUNT, (height - frameHeight) / 3);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        f.setLocation(screenSize.width / 2 - f.getWidth() / 2, screenSize.height / 2 - f.getHeight() / 2);
+
     }
 
 
