@@ -95,7 +95,11 @@ public class AddBookCopyUI extends JFrame {
         if (!isbn.isEmpty() && !copyNumberText.isEmpty()) {
             try {
                 int copyNumber = Integer.parseInt(copyNumberText);
-                SystemController.getInstance().addBookCopy(isbn, copyNumber, AddBookCopyUI.this);
+                if(copyNumber <1){
+                    showError("Invalid copy book number!");
+                }
+                else
+                    SystemController.getInstance().addBookCopy(isbn, copyNumber, AddBookCopyUI.this);
                 clearInputs();
             } catch (NumberFormatException e) {
                 showError("Copy Number must be a numeric value.");
