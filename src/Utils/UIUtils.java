@@ -17,10 +17,13 @@ public class UIUtils {
     public static final Color COLOR_INTERACTIVE = new Color(108, 216, 158);
     public static final Color COLOR_INTERACTIVE_DARKER = new Color(87, 171, 127);
     public static final Color OFFWHITE = new Color(229, 229, 229);
+    public static final Color COLOR_RED = new Color(242, 34, 34);
+    public static final Color COLOR_RED_Darker = new Color(149, 21, 21);
 
     public static final String BUTTON_TEXT_LOGIN = "\uD83D\uDD12 Login";
 
     public static final String PLACEHOLDER_TEXT_USERNAME = "User Id";
+
 
     public static final int ROUNDNESS = 8;
 
@@ -57,6 +60,7 @@ public class UIUtils {
             }
         };
 
+
         customLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -76,6 +80,61 @@ public class UIUtils {
             @Override
             public void mouseExited(MouseEvent e) {
                 buttonColors[0] = UIUtils.COLOR_INTERACTIVE;
+                buttonColors[1] = Color.WHITE;
+                customLabel.repaint();
+            }
+        });
+
+        customLabel.setBackground(UIUtils.COLOR_BACKGROUND);
+        customLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        return customLabel;
+    }
+
+    public JLabel createCustomLogOut(String labelText, ActionListener actionListener) {
+        final Color[] buttonColors = {UIUtils.COLOR_RED, Color.WHITE};
+
+        JLabel customLabel = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = UIUtils.get2dGraphics(g);
+                super.paintComponent(g2);
+
+                Insets insets = getInsets();
+                int w = getWidth() - insets.left - insets.right;
+                int h = getHeight() - insets.top - insets.bottom;
+                g2.setColor(buttonColors[0]);
+                g2.fillRoundRect(insets.left, insets.top, w, h, UIUtils.ROUNDNESS, UIUtils.ROUNDNESS);
+
+                FontMetrics metrics = g2.getFontMetrics(UIUtils.FONT_GENERAL_UI);
+                int x2 = (getWidth() - metrics.stringWidth(labelText)) / 2;
+                int y2 = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
+                g2.setFont(UIUtils.FONT_GENERAL_UI);
+                g2.setColor(buttonColors[1]);
+                g2.drawString(labelText, x2, y2);
+            }
+        };
+
+
+        customLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // Perform the action associated with the label
+                if (actionListener != null) {
+                    actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                buttonColors[0] = UIUtils.COLOR_RED_Darker;
+                buttonColors[1] = UIUtils.OFFWHITE;
+                customLabel.repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                buttonColors[0] = UIUtils.COLOR_RED;
                 buttonColors[1] = Color.WHITE;
                 customLabel.repaint();
             }

@@ -26,4 +26,6 @@ public interface DataAccess {
 	public LibraryMember getMember(String memberId);
 	public void returnBook(Book book,String memberId, int bookCopyId);
 	public void updateBook(BookCopy bookCopy);
+	public void updateMember(String memberId, LibraryMember newMemberInfo);
+	public List<LibraryMember> getAllMembers();
 }
