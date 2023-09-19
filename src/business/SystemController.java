@@ -31,7 +31,7 @@ public class SystemController {
         try {
             int memberId = Integer.parseInt(memberNo);
             int zipCode = Integer.parseInt(zip);
-            int phone = Integer.parseInt(phoneNumber);
+
 
             Address address = new Address(state, city, street, zip);
             LibraryMember libraryMember = new LibraryMember(memberNo, firstName, lastName, phoneNumber, address);
@@ -43,6 +43,42 @@ public class SystemController {
         }
 
 
+    }
+
+    public void editMember(String memberId, String firstName, String lastName, String phoneNumber,
+                           String state, String city, String street, String zip, EditMemberUI editMemberUI){
+
+        LibraryMember libraryMember = getMember(memberId);
+        if(libraryMember != null){
+            LibraryMember newUpdate = new LibraryMember(memberId,firstName,lastName,phoneNumber,new Address(state,city,street,zip));
+            dataAccess.updateMember(libraryMember.getMemberId(),newUpdate);
+            editMemberUI.displaySuccess("Member updated");
+        }
+        else
+            editMemberUI.displayError("Member Doesn't Exist");
+    }
+
+    public LibraryMember getMember(String memberId){
+
+        LibraryMember libraryMember = dataAccess.getMember(memberId);
+
+        if(libraryMember != null)
+            return libraryMember;
+        else
+            return null;
+    }
+
+    public void removeMember(String memberId,ViewMembersUI viewMembersUI){
+        LibraryMember libraryMember = getMember(memberId);
+        if(libraryMember != null){
+            dataAccess.removeMember(memberId);
+            viewMembersUI.displaySuccess("Member Removed");
+        }
+        else
+            viewMembersUI.displayError("Member Doesn't Exist");
+    }
+    public List<LibraryMember> getAllLibraryMembers(){
+        return  dataAccess.getAllMembers();
     }
 
 

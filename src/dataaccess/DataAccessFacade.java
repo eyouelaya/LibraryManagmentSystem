@@ -40,16 +40,30 @@ public class DataAccessFacade implements DataAccess {
 		}
 	}
 
-	//update member
+	@Override
 	public void updateMember(String memberId, LibraryMember newMemberInfo) {
 		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
-
 		if (libraryMemberHashMap.containsKey(memberId)) {
 			libraryMemberHashMap.put(memberId, newMemberInfo);
 			saveToStorage(StorageType.MEMBERS, libraryMemberHashMap);
-		} else {
-			JOptionPane.showMessageDialog(null, "Member Id does not exist");
 		}
+	}
+	@Override
+	public void removeMember(String memberId) {
+		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
+		if (libraryMemberHashMap.containsKey(memberId)) {
+			libraryMemberHashMap.remove(memberId);
+			saveToStorage(StorageType.MEMBERS, libraryMemberHashMap);
+		}
+	}
+	@Override
+	public List<LibraryMember> getAllMembers(){
+		HashMap<String, LibraryMember> libraryMemberHashMap = readMemberMap();
+		List<LibraryMember> libraryMembers = new ArrayList<>();
+		libraryMemberHashMap.forEach((k,v)->{
+			libraryMembers.add(v);
+		});
+		return libraryMembers;
 	}
 
 	@Override
@@ -141,6 +155,8 @@ public class DataAccessFacade implements DataAccess {
 		CheckOutRecord checkOutRecord = libraryMember.getCheckOutRecord();
 		return checkOutRecord.getCheckOutRecordEntries();
 	}
+
+
 
 
 
