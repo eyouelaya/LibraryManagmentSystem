@@ -111,6 +111,7 @@ public class AddMemberUI extends JFrame {
         mainPanel.add(bottomPanel);
 
         add(mainPanel);
+        toaster = new Toaster(mainPanel);
 
         inputPanel.setBackground(UIUtils.COLOR_BACKGROUND);
         topPanel.setBackground(UIUtils.COLOR_BACKGROUND);
