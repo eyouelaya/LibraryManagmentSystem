@@ -28,4 +28,5 @@ public interface DataAccess {
 	public void updateBook(BookCopy bookCopy);
 	public void updateMember(String memberId, LibraryMember newMemberInfo);
 	public List<LibraryMember> getAllMembers();
+	public void removeMember(String memberId);
 }

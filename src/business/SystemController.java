@@ -67,6 +67,16 @@ public class SystemController {
         else
             return null;
     }
+
+    public void removeMember(String memberId,ViewMembersUI viewMembersUI){
+        LibraryMember libraryMember = getMember(memberId);
+        if(libraryMember != null){
+            dataAccess.removeMember(memberId);
+            viewMembersUI.displaySuccess("Member Removed");
+        }
+        else
+            viewMembersUI.displayError("Member Doesn't Exist");
+    }
     public List<LibraryMember> getAllLibraryMembers(){
         return  dataAccess.getAllMembers();
     }
