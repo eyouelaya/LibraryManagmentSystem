@@ -51,7 +51,7 @@ public class ViewMembersUI extends JFrame {
             memberIdText.setColumns(10);
             panel1.add(memberIdText);
 
-            editButton.setText("\uD83D\uDD0D Edit");
+            editButton.setText("Edit");
             editButton.setFont(new Font("Arial", Font.PLAIN, 16));
             editButton.setBackground(new Color(0, 128, 0));
             editButton.setOpaque(true);
