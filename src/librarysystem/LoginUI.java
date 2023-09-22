@@ -2,29 +2,30 @@ package librarysystem;
 
 import Toaster.Toaster;
 import Utils.TextFieldPassword;
-import Utils.TextFieldUsername;
+import Utils.CustomTextField;
 import Utils.UIUtils;
 import business.SystemController;
 import dataaccess.Auth;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Objects;
+import java.io.IOException;
 
 public class LoginUI extends JFrame {
 
     private final Toaster toaster;
 
-    private TextFieldUsername usernameField;
+    private CustomTextField usernameField;
 
     private TextFieldPassword passwordField;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new LoginUI();
     }
 
-    LoginUI() {
+    LoginUI() throws IOException {
         JPanel mainJPanel = getMainJPanel();
 
         addLogo(mainJPanel);
@@ -97,16 +98,17 @@ public class LoginUI extends JFrame {
         separator1.setBounds(310, 80, 1, 240);
     }
 
-    private void addLogo(JPanel panel1) {
+    private void addLogo(JPanel panel1) throws IOException {
         JLabel label1 = new JLabel();
         label1.setFocusable(false);
-        label1.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("book.png")).getFile()));
+//        label1.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("book.png")).getFile()));
+        label1.setIcon(new ImageIcon(ImageIO.read(getClass().getClassLoader().getResourceAsStream("book.png"))));
         panel1.add(label1);
         label1.setBounds(55, 146, 200, 110);
     }
 
     private void addUsernameTextField(JPanel panel1) {
-        usernameField = new TextFieldUsername();
+        usernameField = new CustomTextField();
 
         usernameField.setBounds(423, 109, 250, 44);
         usernameField.addFocusListener(new FocusListener() {

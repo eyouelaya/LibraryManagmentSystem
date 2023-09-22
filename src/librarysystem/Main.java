@@ -1,6 +1,7 @@
 package librarysystem;
 
 import java.awt.*;
+import java.io.IOException;
 
 
 public class Main {
@@ -9,7 +10,11 @@ public class Main {
 	      EventQueue.invokeLater(new Runnable() {
 			  @Override
 			  public void run() {
-				  new LoginUI();
+				  try {
+					  new LoginUI();
+				  } catch (IOException e) {
+					  throw new RuntimeException(e);
+				  }
 			  }
 		  });
 	   }

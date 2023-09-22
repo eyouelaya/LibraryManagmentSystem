@@ -1,7 +1,7 @@
 package librarysystem;
 
 import Toaster.Toaster;
-import Utils.TextFieldUsername;
+import Utils.CustomTextField;
 import Utils.UIUtils;
 import business.SystemController;
 
@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class ReturnBookUI extends JFrame {
     private JButton getStatusButton, returnButton;
     private JLabel memberID, bookCopyNumber, bookStatus, bookISBN;
-    private TextFieldUsername memberIDInput, bookCopyNumberInput, bookStatusOutput, bookISBNInput;
+    private CustomTextField memberIDInput, bookCopyNumberInput, bookStatusOutput, bookISBNInput;
     private JPanel returnInput, mainPanel;
     private Toaster toaster;
 
@@ -26,12 +26,12 @@ public class ReturnBookUI extends JFrame {
         memberID = new JLabel("Input Member ID");
         memberID.setForeground(Color.white);
         memberID.setFont(UIUtils.FONT_GENERAL_UI);
-        memberIDInput = new TextFieldUsername();
+        memberIDInput = new CustomTextField();
         memberIDInput.setColumns(10);
         bookCopyNumber = new JLabel("Input Book Copy Number");
         bookCopyNumber.setFont(UIUtils.FONT_GENERAL_UI);
         bookCopyNumber.setForeground(Color.white);
-        bookCopyNumberInput = new TextFieldUsername();
+        bookCopyNumberInput = new CustomTextField();
         bookCopyNumberInput.setColumns(13);
 
         getStatusButton = new JButton("Show");
@@ -53,12 +53,12 @@ public class ReturnBookUI extends JFrame {
         bookStatus = new JLabel("Book Fee Due");
         bookStatus.setFont(UIUtils.FONT_GENERAL_UI);
         bookStatus.setForeground(Color.white);
-        bookStatusOutput = new TextFieldUsername();
+        bookStatusOutput = new CustomTextField();
         bookStatusOutput.setColumns(10);
         bookISBN = new JLabel("Input Book ISBN");
         bookISBN.setFont(UIUtils.FONT_GENERAL_UI);
         bookISBN.setForeground(Color.white);
-        bookISBNInput = new TextFieldUsername();
+        bookISBNInput = new CustomTextField();
         bookISBNInput.setColumns(13);
         bookStatusOutput.setEditable(false);
 

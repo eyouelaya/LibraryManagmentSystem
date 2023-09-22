@@ -6,6 +6,7 @@ import dataaccess.Auth;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.IOException;
 
 public class MainView extends JFrame {
 
@@ -50,7 +51,12 @@ public class MainView extends JFrame {
 
         logoutButton = uiUtils.createCustomLogOut("⛔ LogOut", e -> {
             MainView.this.setVisible(false);
-            new LoginUI().setVisible(true);});
+            try {
+                new LoginUI().setVisible(true);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         logoutButton.setBorder(paddingBorder);
 
         setSize(GuiProperties.SCREEN_WIDTH, GuiProperties.SCREEN_HEIGHT);

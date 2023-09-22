@@ -2,7 +2,7 @@ package librarysystem;
 
 import Toaster.Toaster;
 import Utils.CustomWideComboBox;
-import Utils.TextFieldUsername;
+import Utils.CustomTextField;
 import Utils.UIUtils;
 import business.Author;
 import business.SystemController;
@@ -22,9 +22,9 @@ public class AddBookUI extends JFrame {
     private JPanel mainPanel;
     private JLabel successLabel;
     private JLabel bookTitleLabel;
-    private TextFieldUsername bookTitleField;
+    private CustomTextField bookTitleField;
     private JLabel isbnLabel;
-    private TextFieldUsername isbnField;
+    private CustomTextField isbnField;
     private CustomWideComboBox checkoutLengthSelector;
     private JButton addAuthorButton;
     private JLabel checkoutLengthLabel;
@@ -59,13 +59,13 @@ public class AddBookUI extends JFrame {
         bookTitleLabel = new JLabel("Book Title:");
         bookTitleLabel.setForeground(Color.white);
         bookTitleLabel.setFont(UIUtils.FONT_GENERAL_UI);
-        bookTitleField = new TextFieldUsername();
+        bookTitleField = new CustomTextField();
         bookTitleField.setColumns(20);
 
         isbnLabel = new JLabel("ISBN:");
         isbnLabel.setForeground(Color.white);;
         isbnLabel.setFont(UIUtils.FONT_GENERAL_UI);
-        isbnField = new TextFieldUsername();
+        isbnField = new CustomTextField();
         isbnField.setColumns(20);
 
         checkoutLengthLabel = new JLabel("Max Checkout Length:");

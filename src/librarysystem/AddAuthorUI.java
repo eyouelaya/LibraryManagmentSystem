@@ -1,7 +1,7 @@
 
 package librarysystem;
 
-import Utils.TextFieldUsername;
+import Utils.CustomTextField;
 import Utils.UIUtils;
 import business.Address;
 import business.Author;
@@ -17,7 +17,7 @@ public class AddAuthorUI extends JFrame {
     private JPanel topPanel,bottomPanel,middlePanel, mainPanel;
     private JButton addAuthorBtn;
     private JLabel firstName;
-    private TextFieldUsername firstNameTextField, lastNameText,phoneNumberText,cityText,stateText,zipText,streetText,shortBioText;;
+    private CustomTextField firstNameTextField, lastNameText,phoneNumberText,cityText,stateText,zipText,streetText,shortBioText;;
     private JLabel lastName;
 
     private JLabel phoneNumber;
@@ -46,35 +46,35 @@ public class AddAuthorUI extends JFrame {
         firstName = new JLabel("First Name");
         firstName.setFont(UIUtils.FONT_GENERAL_UI);
         firstName.setForeground(Color.white);
-        firstNameTextField = new TextFieldUsername();
+        firstNameTextField = new CustomTextField();
         lastName = new JLabel("Last Name");
         lastName.setFont(UIUtils.FONT_GENERAL_UI);
         lastName.setForeground(Color.white);
-        lastNameText = new TextFieldUsername();
+        lastNameText = new CustomTextField();
         phoneNumber = new JLabel("Phone Number");
         phoneNumber.setForeground(Color.white);
         phoneNumber.setFont(UIUtils.FONT_GENERAL_UI);
-        phoneNumberText = new TextFieldUsername();
+        phoneNumberText = new CustomTextField();
         city = new JLabel("City");
         city.setFont(UIUtils.FONT_GENERAL_UI);
         city.setForeground(Color.white);
-        cityText = new TextFieldUsername();
+        cityText = new CustomTextField();
         state = new JLabel("State");
         state.setFont(UIUtils.FONT_GENERAL_UI);
         state.setForeground(Color.white);
-        stateText = new TextFieldUsername();
+        stateText = new CustomTextField();
         zip = new JLabel("Zip");
         zip.setFont(UIUtils.FONT_GENERAL_UI);
         zip.setForeground(Color.white);
-        zipText = new TextFieldUsername();
+        zipText = new CustomTextField();
         street = new JLabel("Street");
         street.setFont(UIUtils.FONT_GENERAL_UI);
         street.setForeground(Color.white);
-        streetText = new TextFieldUsername();
+        streetText = new CustomTextField();
         shortBio = new JLabel("Short Bio");
         shortBio.setFont(UIUtils.FONT_GENERAL_UI);
         shortBio.setForeground(Color.white);
-        shortBioText = new TextFieldUsername();
+        shortBioText = new CustomTextField();
         middlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));

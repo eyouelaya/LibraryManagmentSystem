@@ -1,7 +1,7 @@
 package librarysystem;
 
 import Toaster.Toaster;
-import Utils.TextFieldUsername;
+import Utils.CustomTextField;
 import Utils.UIUtils;
 import business.SystemController;
 
@@ -14,9 +14,9 @@ public class AddBookCopyUI extends JFrame {
     private JPanel mainPanel;
     private JPanel inputPanel;
     private JLabel copyNumberLabel;
-    private TextFieldUsername copyNumberTextField;
+    private CustomTextField copyNumberTextField;
     private JLabel isbnLabel;
-    private TextFieldUsername isbnTextField;
+    private CustomTextField isbnTextField;
     private JButton addButton;
     private JLabel submitButton;
 
@@ -52,14 +52,14 @@ public class AddBookCopyUI extends JFrame {
         copyNumberLabel = new JLabel("Copy Number:");
         copyNumberLabel.setFont(UIUtils.FONT_GENERAL_UI);
         copyNumberLabel.setForeground(Color.white);
-        copyNumberTextField = new TextFieldUsername();
+        copyNumberTextField = new CustomTextField();
         copyNumberTextField.setColumns(10);
 
         // ISBN Input
         isbnLabel = new JLabel("ISBN:");
         isbnLabel.setFont(UIUtils.FONT_GENERAL_UI);
         isbnLabel.setForeground(Color.white);
-        isbnTextField = new TextFieldUsername();
+        isbnTextField = new CustomTextField();
         isbnTextField.setColumns(10);
 
         submitButton = uiUtils.createCustomLabel("Add Copy", e -> { addCopyButtonClicked();});

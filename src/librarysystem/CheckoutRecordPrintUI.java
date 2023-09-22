@@ -1,7 +1,7 @@
 package librarysystem;
 
 import Toaster.Toaster;
-import Utils.TextFieldUsername;
+import Utils.CustomTextField;
 import Utils.UIUtils;
 import business.CheckOutRecordEntry;
 import business.SystemController;
@@ -15,7 +15,7 @@ public class CheckoutRecordPrintUI extends JFrame {
     private Toaster toaster;
     private JPanel panel1;
     private JLabel memberIDLabel;
-    private TextFieldUsername memberIdText;
+    private CustomTextField memberIdText;
     private JButton searchRecords;
     private JScrollPane scrollPane1;
     private JTable recordEntryTable;
@@ -27,7 +27,7 @@ public class CheckoutRecordPrintUI extends JFrame {
         panel1 = new JPanel();
         toaster = new Toaster(panel1);
         memberIDLabel = new JLabel();
-        memberIdText = new TextFieldUsername();
+        memberIdText = new CustomTextField();
         searchRecords = new JButton();
         scrollPane1 = new JScrollPane();
         recordEntryTable = new JTable();

@@ -1,7 +1,7 @@
 package librarysystem;
 
 import Toaster.Toaster;
-import Utils.TextFieldUsername;
+import Utils.CustomTextField;
 import Utils.UIUtils;
 import business.SystemController;
 
@@ -18,7 +18,7 @@ public class AddMemberUI extends JFrame {
     private JPanel topPanel,bottomPanel,middlePanel, mainPanel;
     private JButton addNewMember;
     private JLabel firstName;
-    private TextFieldUsername firstNameTextField,memberID, lastNameText,phoneNumberText,cityText,stateText,zipText,streetText;;
+    private CustomTextField firstNameTextField,memberID, lastNameText,phoneNumberText,cityText,stateText,zipText,streetText;;
     private JLabel lastName;
 
     private JLabel phoneNumber;
@@ -41,41 +41,41 @@ public class AddMemberUI extends JFrame {
         memberIdLabel = new JLabel("Member ID");
         memberIdLabel.setFont(UIUtils.FONT_GENERAL_UI);
         memberIdLabel.setForeground(Color.white);
-        memberID = new TextFieldUsername();
+        memberID = new CustomTextField();
         firstName = new JLabel("First Name");
         firstName.setFont(UIUtils.FONT_GENERAL_UI);
         firstName.setForeground(Color.white);
-        firstNameTextField = new TextFieldUsername();
+        firstNameTextField = new CustomTextField();
         firstNameTextField.setColumns(10);
         lastName = new JLabel("Last Name");
         lastName.setFont(UIUtils.FONT_GENERAL_UI);
         lastName.setForeground(Color.white);
-        lastNameText = new TextFieldUsername();
+        lastNameText = new CustomTextField();
         lastNameText.setColumns(10);
         phoneNumber = new JLabel("Phone Number");
         phoneNumber.setForeground(Color.white);
         phoneNumber.setFont(UIUtils.FONT_GENERAL_UI);
-        phoneNumberText = new TextFieldUsername();
+        phoneNumberText = new CustomTextField();
         phoneNumberText.setColumns(10);
         city = new JLabel("City");
         city.setFont(UIUtils.FONT_GENERAL_UI);
         city.setForeground(Color.white);
-        cityText = new TextFieldUsername();
+        cityText = new CustomTextField();
         cityText.setColumns(10);
         state = new JLabel("State");
         state.setFont(UIUtils.FONT_GENERAL_UI);
         state.setForeground(Color.white);
-        stateText = new TextFieldUsername();
+        stateText = new CustomTextField();
         stateText.setColumns(10);
         zip = new JLabel("Zip");
         zip.setFont(UIUtils.FONT_GENERAL_UI);
         zip.setForeground(Color.white);
-        zipText = new TextFieldUsername();
+        zipText = new CustomTextField();
         zipText.setColumns(10);
         street = new JLabel("Street");
         street.setFont(UIUtils.FONT_GENERAL_UI);
         street.setForeground(Color.white);
-        streetText = new TextFieldUsername();
+        streetText = new CustomTextField();
         streetText.setColumns(10);
         middlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));

@@ -1,14 +1,12 @@
 package librarysystem;
 
 import Toaster.Toaster;
-import Utils.TextFieldUsername;
+import Utils.CustomTextField;
 import Utils.UIUtils;
-import business.LibraryMember;
 import business.SystemController;
 import dataaccess.Auth;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 
@@ -16,7 +14,7 @@ public class ViewMembersUI extends JFrame {
     private Toaster toaster;
     private JPanel panel1;
     private JLabel memberIDLabel;
-    private TextFieldUsername memberIdText;
+    private CustomTextField memberIdText;
     private JButton editButton, deleteButton;
     private JScrollPane scrollPane1;
     private JTable libraryMemberTable;
@@ -28,7 +26,7 @@ public class ViewMembersUI extends JFrame {
         panel1 = new JPanel();
         toaster = new Toaster(panel1);
         memberIDLabel = new JLabel();
-        memberIdText = new TextFieldUsername();
+        memberIdText = new CustomTextField();
         editButton = new JButton();
         deleteButton = new JButton("Delete");
         scrollPane1 = new JScrollPane();

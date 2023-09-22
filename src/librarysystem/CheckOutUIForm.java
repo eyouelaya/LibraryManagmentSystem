@@ -1,7 +1,7 @@
 package librarysystem;
 
 import Toaster.Toaster;
-import Utils.TextFieldUsername;
+import Utils.CustomTextField;
 import Utils.UIUtils;
 import business.SystemController;
 
@@ -18,10 +18,10 @@ public class CheckOutUIForm extends JFrame {
     private JPanel panel3;
     private JLabel label3;
     private JLabel label4;
-    private TextFieldUsername memberIDTextField;
+    private CustomTextField memberIDTextField;
     private JPanel panel2;
     private JLabel label2;
-    private TextFieldUsername isbnTextField;
+    private CustomTextField isbnTextField;
     public CheckOutUIForm() {
         initComponents();
     }
@@ -41,10 +41,10 @@ public class CheckOutUIForm extends JFrame {
         panel3 = new JPanel();
         label3 = new JLabel();
         label4 = new JLabel();
-        memberIDTextField = new TextFieldUsername();
+        memberIDTextField = new CustomTextField();
         panel2 = new JPanel();
         label2 = new JLabel();
-        isbnTextField = new TextFieldUsername();
+        isbnTextField = new CustomTextField();
 
         //======== this ========
         setLayout(new BorderLayout(8, 8));
