@@ -2,6 +2,18 @@
 
 This is a basic Library Management System implemented in Java. 
 
+#Project Setup
+project was created with intellj with jdk 20 and it uses a binary file to set up and store database
+
+##setps
+1. create a folder inside data access called "storage" and run test data file to set up the database
+2. run the main window in the UI folder
+
+## to build project
+1. run build artifacts on the main class and go to artifacts folder
+2. create src/dataaccess/storage directory and add test data output files "MEMBERS", "BOOKS","USERS"
+3. copy the image file "book.png" to the built jar file location
+
 Basic Use Cases Implemented 
 1. Login
 • The first screen a user of the system sees is the login screen, which requests ID and
@@ -53,12 +65,7 @@ should show, in a read-only JTable, the ISBN, book title, copy numbers of each c
 library member (if any) has checked out a given copy, and when that copy is due back in the
 library.
 
-#Project Setup
-project was created with intellj with jdk 20 and it uses a binary file to set up and store database
 
-##setps
-1. create a folder inside data access called "storage" and run test data file to set up the database
-2. run the main window in the UI folder
 
 Project Developers
 Eyouel Kenfu 
